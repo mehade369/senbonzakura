@@ -1,0 +1,7 @@
+name: SuperNova
+
+packages:
+  - packages/**
+  # - packages/auth_repository
+  # - packages/milky_way
+  # - packages/user_repository

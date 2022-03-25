@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../packages/milky_way"
+    },
+    {
+      "path": "../packages/q_form"
+    },
+    {
+      "path": "../packages/app_theme"
+    }
+  ]
+}
