@@ -47,7 +47,10 @@ class RootNavigationStack extends StatelessWidget with UiLoggy {
                   selectedIcon: Icon(Icons.home),
                 ),
                 BlocSelector<CartBloc, CartState, int>(
-                  selector: (state) => state.totalItems,
+                  selector: (state) => state.maybeMap(
+                    orElse: () => 0,
+                    loaded: (value) => value.cart.items.length,
+                  ),
                   builder: (context, totalItems) {
                     return NavigationDestination(
                       icon: const Icon(

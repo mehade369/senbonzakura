@@ -38,7 +38,7 @@ abstract class RouterX {
               create: (_) => HomeBloc(),
             ),
             BlocProvider(
-              create: (_) => CartBloc(),
+              create: (_) => CartBloc()..add(const CartEvent.loadCart()),
             ),
             BlocProvider(
               create: (_) => NotificationsBloc(),
