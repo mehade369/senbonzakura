@@ -23,7 +23,7 @@ class _$ProductPreviewTearOff {
   const _$ProductPreviewTearOff();
 
   _ProductPreview call(
-      {required int id,
+      {@JsonKey(name: r'$id') required String id,
       required String name,
       required String thumbnailImage,
       required int currentStockCount,
@@ -55,7 +55,8 @@ const $ProductPreview = _$ProductPreviewTearOff();
 
 /// @nodoc
 mixin _$ProductPreview {
-  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: r'$id')
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get thumbnailImage => throw _privateConstructorUsedError;
   int get currentStockCount => throw _privateConstructorUsedError;
@@ -77,7 +78,7 @@ abstract class $ProductPreviewCopyWith<$Res> {
           ProductPreview value, $Res Function(ProductPreview) then) =
       _$ProductPreviewCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {@JsonKey(name: r'$id') String id,
       String name,
       String thumbnailImage,
       int currentStockCount,
@@ -113,7 +114,7 @@ class _$ProductPreviewCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -158,7 +159,7 @@ abstract class _$ProductPreviewCopyWith<$Res>
       __$ProductPreviewCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {@JsonKey(name: r'$id') String id,
       String name,
       String thumbnailImage,
       int currentStockCount,
@@ -196,7 +197,7 @@ class __$ProductPreviewCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -237,7 +238,7 @@ class __$ProductPreviewCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProductPreview implements _ProductPreview {
   const _$_ProductPreview(
-      {required this.id,
+      {@JsonKey(name: r'$id') required this.id,
       required this.name,
       required this.thumbnailImage,
       required this.currentStockCount,
@@ -251,7 +252,8 @@ class _$_ProductPreview implements _ProductPreview {
       _$$_ProductPreviewFromJson(json);
 
   @override
-  final int id;
+  @JsonKey(name: r'$id')
+  final String id;
   @override
   final String name;
   @override
@@ -321,7 +323,7 @@ class _$_ProductPreview implements _ProductPreview {
 
 abstract class _ProductPreview implements ProductPreview {
   const factory _ProductPreview(
-      {required int id,
+      {@JsonKey(name: r'$id') required String id,
       required String name,
       required String thumbnailImage,
       required int currentStockCount,
@@ -335,7 +337,8 @@ abstract class _ProductPreview implements ProductPreview {
       _$_ProductPreview.fromJson;
 
   @override
-  int get id;
+  @JsonKey(name: r'$id')
+  String get id;
   @override
   String get name;
   @override

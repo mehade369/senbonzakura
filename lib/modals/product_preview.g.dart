@@ -8,7 +8,7 @@ part of 'product_preview.dart';
 
 _$_ProductPreview _$$_ProductPreviewFromJson(Map<String, dynamic> json) =>
     _$_ProductPreview(
-      id: json['id'] as int,
+      id: json[r'$id'] as String,
       name: json['name'] as String,
       thumbnailImage: json['thumbnailImage'] as String,
       currentStockCount: json['currentStockCount'] as int,
@@ -21,7 +21,7 @@ _$_ProductPreview _$$_ProductPreviewFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ProductPreviewToJson(_$_ProductPreview instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      r'$id': instance.id,
       'name': instance.name,
       'thumbnailImage': instance.thumbnailImage,
       'currentStockCount': instance.currentStockCount,

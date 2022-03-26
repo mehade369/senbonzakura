@@ -1,22 +1,34 @@
 import 'package:app_theme/app_theme.dart';
+import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/src/client.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:senbonzakura/app/app.dart';
 import 'package:senbonzakura/l10n/l10n.dart';
+import 'package:senbonzakura/repositories/repositories.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.client}) : super(key: key);
+
+  final Client client;
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider(
-          create: (context) => ThemeCubit(),
+        RepositoryProvider(
+          create: (context) => ProductRepository(database: Database(client)),
         ),
       ],
-      child: const _AppBody(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ThemeCubit(),
+          ),
+        ],
+        child: const _AppBody(),
+      ),
     );
   }
 }

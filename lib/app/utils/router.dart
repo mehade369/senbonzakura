@@ -7,6 +7,7 @@ import 'package:senbonzakura/forget_password/forget_password.dart';
 import 'package:senbonzakura/home/home.dart';
 import 'package:senbonzakura/notifications/notifications.dart';
 import 'package:senbonzakura/product_details/product_details.dart';
+import 'package:senbonzakura/repositories/repositories.dart';
 import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';
 import 'package:senbonzakura/search/search.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
@@ -38,7 +39,9 @@ abstract class RouterX {
               create: (_) => RootNavigationStackCubit(),
             ),
             BlocProvider(
-              create: (_) => HomeBloc()..add(const HomeEvent.started()),
+              create: (context) => HomeBloc(
+                productRepository: context.read<ProductRepository>(),
+              )..add(const HomeEvent.started()),
             ),
             BlocProvider(
               create: (_) => CartBloc()..add(const CartEvent.loadCart()),
@@ -86,6 +89,7 @@ abstract class RouterX {
 
               return BlocProvider(
                 create: (context) => ProductDetailsCubit(
+                  productRepository: context.read<ProductRepository>(),
                   images: images,
                   productId: productId,
                 )..fetchProductDetails(productId),

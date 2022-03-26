@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:appwrite/src/client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,7 @@ import 'package:senbonzakura/app/app.dart';
 
 const separator = SizedBox(height: 20);
 
-void bootstrap() {
+void bootstrap({required Client client}) {
   FlutterError.onError = (details) {
     log(
       details.exceptionAsString(),
@@ -29,8 +30,10 @@ void bootstrap() {
 
       await HydratedBlocOverrides.runZoned(
         () async => runApp(
-          const ProviderScope(
-            child: MyApp(),
+          ProviderScope(
+            child: MyApp(
+              client: client,
+            ),
           ),
         ),
         blocObserver: AppBlocObserver(),

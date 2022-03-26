@@ -6,7 +6,7 @@ part 'product_preview.g.dart';
 @freezed
 class ProductPreview with _$ProductPreview {
   const factory ProductPreview({
-    required int id,
+    @JsonKey(name: r'$id') required String id,
     required String name,
     required String thumbnailImage,
     required int currentStockCount,
