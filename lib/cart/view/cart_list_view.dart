@@ -7,6 +7,7 @@ import 'package:senbonzakura/app/app.dart';
 import 'package:senbonzakura/cart/cart.dart';
 import 'package:senbonzakura/cart/widgets/widgets.dart';
 import 'package:senbonzakura/modals/modals.dart';
+import 'package:senbonzakura/repositories/repositories.dart';
 import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';
 
 class CartListView extends StatelessWidget {
@@ -184,7 +185,13 @@ class _NewWidgetState extends State<CartItems> {
                       );
                 },
                 onTap: () {
-                  // context.
+                  context.goNamed(
+                    App.productDetail,
+                    params: {
+                      'productId': product.id.toString(),
+                    },
+                    extra: images,
+                  );
                 },
               ),
             ),

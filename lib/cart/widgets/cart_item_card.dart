@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:milky_way/milky_way.dart';
 import 'package:senbonzakura/modals/modals.dart';
 
-
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
     Key? key,
@@ -57,8 +56,7 @@ class CartItemCard extends StatelessWidget {
                           style: context.textTheme.bodyMedium,
                         ),
                         TextSpan(
-                          text:
-                              '\nShipping Fee: ${item.shippingCost}',
+                          text: '\nShipping Fee: ${item.shippingCost}',
                           style: context.textTheme.caption,
                         ),
                       ],

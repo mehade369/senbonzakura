@@ -1,5 +1,3 @@
-
-
 import 'package:fpdart/fpdart.dart';
 import 'package:senbonzakura/modals/modals.dart';
 import 'package:senbonzakura/repositories/repositories.dart';

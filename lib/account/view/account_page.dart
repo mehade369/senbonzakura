@@ -91,9 +91,7 @@ class AccountPage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.color_lens_outlined),
             title: const Text('Theme'),
-            trailing: Icon(
-              Icons.brightness_high,
-            ),
+            trailing: const Icon(Icons.brightness_high),
             onTap: () {
               showDialog<void>(
                 context: context,

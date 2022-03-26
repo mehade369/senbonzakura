@@ -20,16 +20,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         );
 
   void fetchProductDetails(int productId) {
-
     Future.delayed(const Duration(seconds: 2), () async {
-    final data = _productRepository.getProductDetails(productId);
-
-    
-
-
-
-
-
+      final data = _productRepository.getProductDetails(productId);
     });
   }
 

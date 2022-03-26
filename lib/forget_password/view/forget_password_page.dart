@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:milky_way/milky_way.dart';
 import 'package:q_form/q_form.dart';
 import 'package:senbonzakura/bootstrap.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';

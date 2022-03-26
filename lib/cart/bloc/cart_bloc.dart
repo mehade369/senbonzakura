@@ -13,7 +13,7 @@ part 'cart_bloc.freezed.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(const CartState.loading()) {
     on<CartEvent>(
-      (event, emit)async {
+      (event, emit) async {
         await event.map(
           loadCart: (event) async {
             await Future<void>.delayed(const Duration(seconds: 1));
