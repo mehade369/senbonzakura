@@ -20,13 +20,6 @@ class RootNavigationStack extends StatelessWidget with UiLoggy {
     return Builder(
       builder: (context) {
         final state = context.watch<RootNavigationStackCubit>().state;
-        const count = 0;
-        // final _count = context.select((CartCubit cubit) {
-        //   return cubit.state.maybeMap(
-        //     loaded: (value) => value.cart.items.length,
-        //     orElse: () => 0,
-        //   );
-        // });
 
         return Column(
           children: [
@@ -53,12 +46,17 @@ class RootNavigationStack extends StatelessWidget with UiLoggy {
                   label: 'Home',
                   selectedIcon: Icon(Icons.home),
                 ),
-                NavigationDestination(
-                  icon: const Icon(
-                    Icons.shopping_cart_outlined,
-                  ).badge(count),
-                  label: 'Cart',
-                  selectedIcon: const Icon(Icons.shopping_cart),
+                BlocSelector<CartBloc, CartState, int>(
+                  selector: (state) => state.totalItems,
+                  builder: (context, totalItems) {
+                    return NavigationDestination(
+                      icon: const Icon(
+                        Icons.shopping_cart_outlined,
+                      ).badge(totalItems),
+                      label: 'Cart',
+                      selectedIcon: const Icon(Icons.shopping_cart),
+                    );
+                  },
                 ),
                 const NavigationDestination(
                   icon: Icon(Icons.notifications_outlined),
