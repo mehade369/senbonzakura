@@ -1,0 +1,7 @@
+{
+    "@@locale": "en",
+    "homeSearchBarHintText": "I am looking for...",
+    "@homeSearchBarHintText": {
+        "description": "HintText for the search bar in the home page"
+    }
+}

@@ -135,7 +135,7 @@ class _NewWidgetState extends State<CartItems> {
                           actions: [
                             ElevatedButton(
                               onPressed: () => Navigator.of(context).pop(false),
-                              child: const Text('No'),
+                              child: const Text('Cancel'),
                             ),
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(true),
@@ -185,7 +185,6 @@ class _NewWidgetState extends State<CartItems> {
                 },
                 onTap: () {
                   // context.
-         
                 },
               ),
             ),

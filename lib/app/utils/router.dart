@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:senbonzakura/account/account.dart';
@@ -5,18 +6,20 @@ import 'package:senbonzakura/cart/cart.dart';
 import 'package:senbonzakura/forget_password/forget_password.dart';
 import 'package:senbonzakura/home/home.dart';
 import 'package:senbonzakura/notifications/notifications.dart';
+import 'package:senbonzakura/product_details/product_details.dart';
 import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';
 import 'package:senbonzakura/search/search.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
 import 'package:senbonzakura/sign_up/sign_up.dart';
 
 abstract class App {
-  static const String root = '/';
-  static const String signIn = 'sign_in';
-  static const String signUp = 'sign_up';
-  static const String forgetPassword = 'forget_password';
-  static const String signUpForm = 'sign_up_form';
-  static String search = 'search';
+  static const root = '/';
+  static const signIn = 'sign_in';
+  static const signUp = 'sign_up';
+  static const forgetPassword = 'forget_password';
+  static const signUpForm = 'sign_up_form';
+  static const search = 'search';
+  static const productDetail = 'product_detail';
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -35,7 +38,7 @@ abstract class RouterX {
               create: (_) => RootNavigationStackCubit(),
             ),
             BlocProvider(
-              create: (_) => HomeBloc(),
+              create: (_) => HomeBloc()..add(const HomeEvent.started()),
             ),
             BlocProvider(
               create: (_) => CartBloc()..add(const CartEvent.loadCart()),
@@ -50,6 +53,46 @@ abstract class RouterX {
           child: const RootNavigationStack(),
         ),
         routes: [
+          GoRoute(
+            name: App.productDetail,
+            path: '${App.productDetail}/:productId',
+            builder: (context, state) {
+              final params = state.params['productId'];
+
+              /// In order to show smooth animation, we need to use Hero widget.
+              /// and, for Hero Widget need to image/image in the initial state.
+              /// So, we need image from the page where is pushed.
+              ///
+              /// But, in Web we can't get the images if user input the url.
+              final images = state.extra as Iterable<String>;
+
+              if (params == null) {
+                return const Scaffold(
+                  body: Center(
+                    child: Text('No product id'),
+                  ),
+                );
+              }
+
+              final productId = int.tryParse(params);
+
+              if (productId == null) {
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Invalid product id'),
+                  ),
+                );
+              }
+
+              return BlocProvider(
+                create: (context) => ProductDetailsCubit(
+                  images: images,
+                  productId: productId,
+                )..fetchProductDetails(productId),
+                child: const ProductDetailsPage(),
+              );
+            },
+          ),
           GoRoute(
             path: App.search,
             name: App.search,
