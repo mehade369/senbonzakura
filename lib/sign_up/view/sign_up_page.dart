@@ -11,9 +11,6 @@ enum SignUpMethod {
   phone,
 }
 
-// final signUpMethodProvider =
-//     StateProvider<SignUpMethod>((ref) => SignUpMethod.email);
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
@@ -108,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
             separator,
             const ORWidget(),
             separator,
-            const SocialButtonRow(),
+            // const SocialButtonRow(),
             separator,
             BottomAction(
               text: 'Already have an account?',

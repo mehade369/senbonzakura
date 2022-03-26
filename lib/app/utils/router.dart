@@ -21,6 +21,8 @@ abstract class App {
 abstract class RouterX {
   static final router = GoRouter(
     initialLocation: App.root,
+    debugLogDiagnostics: false,
+    urlPathStrategy: UrlPathStrategy.path,
     routes: [
       GoRoute(
         path: App.root,
@@ -49,8 +51,12 @@ abstract class RouterX {
           GoRoute(
             path: App.signIn,
             name: App.signIn,
-            builder: (_, state) => BlocProvider(
-              create: (_) => SignInCubit(),
+            builder: (_, state) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => SignInCubit(),
+                ),
+              ],
               child: const SignInPage(),
             ),
             routes: [
@@ -64,8 +70,12 @@ abstract class RouterX {
           GoRoute(
             path: App.signUp,
             name: App.signUp,
-            builder: (_, state) => BlocProvider(
-              create: (context) => SignUpCubit(),
+            builder: (context, state) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => SignUpCubit(),
+                ),
+              ],
               child: const SignUpPage(),
             ),
             routes: [
