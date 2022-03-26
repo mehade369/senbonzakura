@@ -1,128 +1,15 @@
-import 'dart:developer';
-
-import 'package:appwrite/appwrite.dart';
-
 import 'package:senbonzakura/modals/modals.dart';
 import 'package:senbonzakura/repositories/repositories.dart';
 
 class ProductRepository {
   ProductRepository({
-    required this.database,
+    required this.productApi,
   });
 
-  final Database database;
+  final ProductApi productApi;
 
   Future<Iterable<ProductPreview>> getBestSellingProducts() async {
-    try {
-      final docs = await database.listDocuments(collectionId: 'products');
-
-      final data = docs.documents.map((doc) {
-        final product = ProductPreview.fromJson(doc.data);
-
-        return product;
-      });
-
-      return data;
-    } on AppwriteException catch (e) {
-      rethrow;
-    }
-
-    // Right(
-    //   [
-    //     ProductPreview(
-    //       id: 1,
-    //       name: 'Samsung A50',
-    //       thumbnailImage: images.elementAt(0),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 2,
-    //       name: 'Samsung 8 Pro A8 2020',
-    //       thumbnailImage: images.elementAt(1),
-    //       currentStockCount: 1,
-    //       price: 699.8,
-    //       discountedPrice: 599.8,
-    //     ),
-    //     ProductPreview(
-    //       id: 3,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(2),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 5,
-    //       name: 'Samsung A50 a50 64GB Galaxy A50 64GB Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(4),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 6,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(5),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 7,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(6),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 8,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(7),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 9,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(8),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 10,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(9),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 11,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(10),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 12,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(11),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 13,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(12),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //     ProductPreview(
-    //       id: 14,
-    //       name: 'Samsung A50 Galaxy A50 64GB',
-    //       thumbnailImage: images.elementAt(13),
-    //       currentStockCount: 5,
-    //       price: 599,
-    //     ),
-    //   ],
-    // );
+    return productApi.getProducts();
   }
 
   Future<ProductDetails> getProductDetails(int productId) async {

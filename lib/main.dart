@@ -2,6 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:log_pose/log_pose.dart';
 import 'package:senbonzakura/bootstrap.dart';
+import 'package:senbonzakura/repositories/product_api.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,5 +17,5 @@ Future<void> main() async {
     ..setProject('62352983edc3fbbd013f')
     ..setSelfSigned(status: true);
 
-  bootstrap(client: client);
+  bootstrap(productApi: LocalProductApi());
 }

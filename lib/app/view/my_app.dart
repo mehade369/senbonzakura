@@ -8,16 +8,18 @@ import 'package:senbonzakura/l10n/l10n.dart';
 import 'package:senbonzakura/repositories/repositories.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.client}) : super(key: key);
+  const MyApp({Key? key, required this.productApi}) : super(key: key);
 
-  final Client client;
+  final ProductApi productApi;
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (context) => ProductRepository(database: Database(client)),
+          create: (context) => ProductRepository(
+            productApi: productApi,
+          ),
         ),
       ],
       child: MultiBlocProvider(

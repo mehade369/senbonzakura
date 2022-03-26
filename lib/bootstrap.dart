@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:appwrite/appwrite.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:senbonzakura/app/app.dart';
+import 'package:senbonzakura/repositories/repositories.dart';
 
 const separator = SizedBox(height: 20);
 
-void bootstrap({required Client client}) {
+void bootstrap({required ProductApi productApi}) {
   FlutterError.onError = (details) {
     log(
       details.exceptionAsString(),
@@ -32,7 +32,7 @@ void bootstrap({required Client client}) {
         () async => runApp(
           ProviderScope(
             child: MyApp(
-              client: client,
+              productApi: productApi,
             ),
           ),
         ),
