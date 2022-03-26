@@ -6,6 +6,7 @@ import 'package:senbonzakura/forget_password/forget_password.dart';
 import 'package:senbonzakura/home/home.dart';
 import 'package:senbonzakura/notifications/notifications.dart';
 import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';
+import 'package:senbonzakura/search/search.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
 import 'package:senbonzakura/sign_up/sign_up.dart';
 
@@ -15,6 +16,7 @@ abstract class App {
   static const String signUp = 'sign_up';
   static const String forgetPassword = 'forget_password';
   static const String signUpForm = 'sign_up_form';
+  static String search = 'search';
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -48,6 +50,11 @@ abstract class RouterX {
           child: const RootNavigationStack(),
         ),
         routes: [
+          GoRoute(
+            path: App.search,
+            name: App.search,
+            builder: (_, state) => const SearchPage(),
+          ),
           GoRoute(
             path: App.signIn,
             name: App.signIn,

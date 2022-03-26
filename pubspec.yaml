@@ -26,6 +26,7 @@ dependencies:
   line_icons: ^2.0.1
   milky_way: 
     path: /home/maverick/Projects/legion/packages/milky_way
+  path_provider: ^2.0.9
   q_form: 
     path: /home/maverick/Projects/legion/packages/q_form
 
