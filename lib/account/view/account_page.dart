@@ -168,6 +168,71 @@ class Avatar extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  void showSourceOptions(BuildContext context) {
+    showBottomSheet<void>(
+      context: context,
+      builder: (_) => Container(
+        height: 400,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 10),
+            Container(
+              width: context.mediaQuery.size.width / 3,
+              height: 5,
+              decoration: BoxDecoration(
+                color: context.colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Change Avatar',
+              style: context.textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.camera_alt_outlined),
+                    title: const Text('Camera'),
+                    onTap: () {
+                      context.read<AccountBloc>().add(
+                            const AccountEvent.updatedProfileAvatar(
+                              source: ImageSource.camera,
+                            ),
+                          );
+                      context.navigator.pop();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.photo_library_outlined),
+                    title: const Text('Gallery'),
+                    onTap: () {
+                      context.read<AccountBloc>().add(
+                            const AccountEvent.updatedProfileAvatar(
+                              source: ImageSource.gallery,
+                            ),
+                          );
+                      context.navigator.pop();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.add_photo_alternate_outlined),
+                    title: const Text('Random'),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final avatarUlr =
@@ -177,77 +242,14 @@ class Avatar extends StatelessWidget {
         context.select((AccountBloc bloc) => bloc.state.avatarStatus);
 
     return InkWell(
-      onTap: () {
-        showBottomSheet<void>(
-          context: context,
-          builder: (_) => Container(
-            height: 400,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 10),
-                Container(
-                  width: context.mediaQuery.size.width / 3,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: context.colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Change Avatar',
-                  style: context.textTheme.bodyLarge,
-                ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      ListTile(
-                        leading: const Icon(Icons.camera_alt_outlined),
-                        title: const Text('Camera'),
-                        onTap: () {
-                          context.read<AccountBloc>().add(
-                                const AccountEvent.updatedProfileAvatar(
-                                  source: ImageSource.camera,
-                                ),
-                              );
-                          context.navigator.pop();
-                        },
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.photo_library_outlined),
-                        title: const Text('Gallery'),
-                        onTap: () {
-                          context.read<AccountBloc>().add(
-                                const AccountEvent.updatedProfileAvatar(
-                                  source: ImageSource.gallery,
-                                ),
-                              );
-                          context.navigator.pop();
-                        },
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.add_photo_alternate_outlined),
-                        title: const Text('Random'),
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-      borderRadius: BorderRadius.circular(100),
+      onTap: () => showSourceOptions(context),
+      borderRadius: BorderRadius.circular(170),
       child: Container(
         width: context.mediaQuery.size.width / 3,
         height: context.mediaQuery.size.width / 3,
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
+          shape: BoxShape.circle,
           border: Border.all(
             color: Theme.of(context).primaryColor,
             width: 2,
@@ -264,7 +266,7 @@ class Avatar extends StatelessWidget {
               octoSet: OctoSet.circleAvatar(
                 backgroundColor: Colors.transparent,
                 text: avatarStatus == AvatarStatus.uploading
-                    ? Loading()
+                    ? const Loading()
                     : const Icon(
                         Icons.person_pin,
                         color: Colors.white,
