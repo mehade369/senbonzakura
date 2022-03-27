@@ -50,6 +50,14 @@ class SignUpCubit extends Cubit<SignUpState> {
     );
   }
 
+  void phoneCodeChanged(String value) {
+    emit(
+      state.copyWith(
+        phoneCode: value,
+      ),
+    );
+  }
+
   void passwordChanged(String value) {
     final passwordInput = PasswordInput(value);
     final status =

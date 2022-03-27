@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -59,17 +61,15 @@ class _SignUpPageState extends State<SignUpPage> {
             switchInCurve: Curves.easeInSine,
             switchOutCurve: Curves.easeOutSine,
             child: _signUpMethod == SignUpMethod.email
-                ? const Email()
-                : const Phone(),
+                ? const Email(
+                    key: Key('email'),
+                  )
+                : const Phone(
+                    key: Key('phone'),
+                  ),
           ),
           separator,
-          SizedBox(
-            width: context.mediaQuery.size.width * 0.5,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Next'),
-            ),
-          ),
+          const _Next(),
           separator,
           const ORWidget(),
           separator,
@@ -86,6 +86,39 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 }
 
+class _Next extends StatelessWidget {
+  const _Next({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: context.mediaQuery.size.width * 0.5,
+      child: BlocSelector<SignUpCubit, SignUpState, bool>(
+        selector: (state) => state.emailInput.valid || state.phoneInput.valid,
+        builder: (context, state) {
+          return ElevatedButton(
+            onPressed: state
+                ? () {
+                    context.navigator.push<void>(
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider.value(
+                          value: context.read<SignUpCubit>(),
+                          child: const SignUpForm(),
+                        ),
+                      ),
+                    );
+                  }
+                : null,
+            child: const Text('Next'),
+          );
+        },
+      ),
+    );
+  }
+}
+
 class Email extends StatefulWidget {
   const Email({
     Key? key,
@@ -96,21 +129,25 @@ class Email extends StatefulWidget {
 }
 
 class _EmailState extends State<Email> {
-  final _emailController = TextEditingController();
+  late final TextEditingController _emailController;
 
   @override
   void dispose() {
+    log('email dispose');
     _emailController.dispose();
     super.dispose();
   }
 
-    @override
-    void initState() {
-      _emailController.addListener(() {
-        context.read<SignUpCubit>().emailChanged(_emailController.text);
-      });
-      super.initState();
-    }
+  @override
+  void initState() {
+    _emailController = TextEditingController(
+      text: context.read<SignUpCubit>().state.emailInput.value,
+    );
+    _emailController.addListener(() {
+      context.read<SignUpCubit>().emailChanged(_emailController.text);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,8 +173,8 @@ class Phone extends StatefulWidget {
 }
 
 class _PhoneState extends State<Phone> {
-  final _phoneController = TextEditingController();
-  final _phonePrefixController = TextEditingController(text: '+088');
+  late final TextEditingController _phoneController;
+  late final TextEditingController _phonePrefixController;
 
   @override
   void dispose() {
@@ -146,13 +183,26 @@ class _PhoneState extends State<Phone> {
     super.dispose();
   }
 
-    @override
-    void initState() {
-      _phoneController.addListener(() {
-        context.read<SignUpCubit>().phoneChanged(_phoneController.text);
-      });
-      super.initState();
-    }
+  @override
+  void initState() {
+    _phoneController = TextEditingController(
+      text: context.read<SignUpCubit>().state.phoneInput.value,
+    );
+
+    _phonePrefixController = TextEditingController(
+      text: context.read<SignUpCubit>().state.phoneCode,
+    );
+
+    _phoneController.addListener(() {
+      context.read<SignUpCubit>().phoneChanged(_phoneController.text);
+    });
+
+    _phonePrefixController.addListener(() {
+      context.read<SignUpCubit>().phoneCodeChanged(_phonePrefixController.text);
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
