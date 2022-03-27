@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "Sakura")
-set(APPLICATION_ID "dev.mehade.senbonzakura")
+set(APPLICATION_ID "dev.mehade.sakura")
 
 cmake_policy(SET CMP0063 NEW)
 
