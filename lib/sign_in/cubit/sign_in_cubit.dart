@@ -47,9 +47,6 @@ class SignInCubit extends Cubit<SignInState> {
 
   Future<void> signInWithEmailAndPassword() async {
     if (state.status.isValidated) {
-      log(state.passwordInput.value);
-      log(state.emailOrPhoneInput.value);
-
       emit(
         state.copyWith(
           status: FormzStatus.submissionInProgress,

@@ -1,3 +1,5 @@
+// ignore_for_file: no_default_cases
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -19,16 +21,20 @@ class _SignInPageState extends State<SignInPage> {
     switch (status) {
       case FormzStatus.submissionInProgress:
         return const Loading();
+      case FormzStatus.submissionFailure:
+        return SignButton(
+          onPressed: status.isValidated
+              ? context.read<SignInCubit>().signInWithEmailAndPassword
+              : null,
+          child: const Text('Failed!!'),
+        );
 
       default:
-        return SizedBox(
-          width: context.mediaQuery.size.width * 0.5,
-          child: ElevatedButton(
-            onPressed: status.isValidated
-                ? context.read<SignInCubit>().signInWithEmailAndPassword
-                : null,
-            child: const Text('Sign In'),
-          ),
+        return SignButton(
+          onPressed: status.isValidated
+              ? context.read<SignInCubit>().signInWithEmailAndPassword
+              : null,
+          child: const Text('Sign In'),
         );
     }
   }
@@ -40,10 +46,6 @@ class _SignInPageState extends State<SignInPage> {
         if (state.status.isSubmissionSuccess) {
           context.showSnackBarMessage('Sign in success');
           context.goNamed(App.root);
-        }
-
-        if (state.error != null) {
-          context.showSnackBarMessage(state.error!);
         }
 
         if (state.status.isSubmissionFailure) {
