@@ -2,7 +2,9 @@ import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:milky_way/milky_way.dart';
+import 'package:senbonzakura/account/account.dart';
 import 'package:senbonzakura/app/app.dart';
 
 class AccountPage extends StatelessWidget {
@@ -33,38 +35,7 @@ class AccountPage extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      context.showSnackBarMessage('Upload photo');
-                    },
-                    borderRadius: BorderRadius.circular(100),
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(
-                          color: Theme.of(context).primaryColor,
-                          width: 2,
-                        ),
-                      ),
-                      child: CircleAvatar(
-                        radius: 60,
-                        child: OctoImage.fromSet(
-                          image: const NetworkImage(
-                            'https://picsum.photos/200/200?random=1',
-                          ),
-                          octoSet: OctoSet.circleAvatar(
-                            backgroundColor:
-                                context.colorScheme.primaryContainer,
-                            text: Text(
-                              'M',
-                              style: context.textTheme.headlineLarge,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  const Avatar(),
                   const SizedBox(height: 10),
                   Text(
                     'Mehade',
@@ -173,6 +144,121 @@ class AccountPage extends StatelessWidget {
             onTap: () => context.showSnackBarMessage('Terms of Service'),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Avatar extends StatelessWidget {
+  const Avatar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final avatarUlr =
+        context.select((AccountBloc bloc) => bloc.state.avatarUrl);
+
+    final avatarStatus =
+        context.select((AccountBloc bloc) => bloc.state.avatarStatus);
+
+    return InkWell(
+      onTap: () {
+        showBottomSheet<void>(
+          context: context,
+          builder: (_) => Container(
+            height: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 10),
+                Container(
+                  width: context.mediaQuery.size.width / 3,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Change Avatar',
+                  style: context.textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.camera_alt_outlined),
+                        title: const Text('Camera'),
+                        onTap: () {
+                          context.read<AccountBloc>().add(
+                                const AccountEvent.updatedProfileAvatar(
+                                  source: ImageSource.camera,
+                                ),
+                              );
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.photo_library_outlined),
+                        title: const Text('Gallery'),
+                        onTap: () {
+                          context.read<AccountBloc>().add(
+                                const AccountEvent.updatedProfileAvatar(
+                                  source: ImageSource.gallery,
+                                ),
+                              );
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.add_photo_alternate_outlined),
+                        title: const Text('Random'),
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(100),
+      child: Container(
+        width: context.mediaQuery.size.width / 3,
+        height: context.mediaQuery.size.width / 3,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          border: Border.all(
+            color: Theme.of(context).primaryColor,
+            width: 2,
+          ),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            OctoImage.fromSet(
+              image: CachedNetworkImageProvider(
+                avatarUlr ?? 'https://picsum.photos/200/300',
+              ),
+              fit: BoxFit.cover,
+              octoSet: OctoSet.circleAvatar(
+                backgroundColor: Colors.transparent,
+                text: Loading(),
+              ),
+            ),
+            // ),
+            if (avatarStatus == AvatarStatus.uploading)
+              const Positioned(
+                height: 50,
+                width: 50,
+                child: Loading(),
+              ),
+          ],
+        ),
       ),
     );
   }
