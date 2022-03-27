@@ -14,78 +14,123 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  final _nameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  @override
+  Widget build(BuildContext context) => KScaffold(
+        child: Column(
+          children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: TopHeading(
+                title: 'Sign Up',
+                subtitle: 'Create a new account',
+              ),
+            ),
+            separator,
+            const Name(),
+            separator,
+            const Password(),
+            separator,
+            SignUpButton(),
+            separator,
+          ],
+        ),
+      );
+}
 
-  final _formKey = GlobalKey<FormState>();
+class SignUpButton extends StatelessWidget {
+  const SignUpButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final status = context.select((SignUpCubit cubit) => cubit.state.status);
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: status == FormzStatus.submissionInProgress
+          ? const Center(child: CircularProgressIndicator())
+          : SizedBox(
+              width: context.mediaQuery.size.width * 0.5,
+              child: ElevatedButton(
+                onPressed: status.isValidated ? () {} : null,
+                child: const Text('Sign Up'),
+              ),
+            ),
+    );
+  }
+}
+
+class Password extends StatefulWidget {
+  const Password({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<Password> createState() => _PasswordState();
+}
+
+class _PasswordState extends State<Password> {
+  late final TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    _passwordController = TextEditingController();
+    _passwordController.addListener(() {
+      context.read<SignUpCubit>().passwordChanged(_passwordController.text);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final passwordInput =
+        context.select((SignUpCubit cubit) => cubit.state.passwordInput);
+
+    return PasswordFormField(
+      controller: _passwordController,
+      errorText: passwordInput.invalid ? 'Password is required' : null,
+    );
+  }
+}
+
+class Name extends StatefulWidget {
+  const Name({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<Name> createState() => _NameState();
+}
+
+class _NameState extends State<Name> {
+  late final TextEditingController _nameController;
+
+  @override
+  void initState() {
+    _nameController = TextEditingController();
+
+    _nameController.addListener(() {
+      context.read<SignUpCubit>().nameChanged(_nameController.text);
+    });
+
+    super.initState();
+  }
 
   @override
   void dispose() {
     _nameController.dispose();
-    _passwordController.dispose();
-    _formKey.currentState?.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => KScaffold(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: TopHeading(
-                  title: 'Sign Up',
-                  subtitle: 'Create a new account',
-                ),
-              ),
-              separator,
-              NameFormField(
-                controller: _nameController,
-                validator: (input) {
-                  if (input == null || input.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              separator,
-              PasswordFormField(
-                controller: _passwordController,
-                validator: (input) {
-                  if (input == null || input.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              separator,
-              BlocBuilder<SignUpCubit, SignUpState>(
-                builder: (context, state) {
-                  return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: state.status == FormzStatus.submissionInProgress
-                        ? const Center(child: CircularProgressIndicator())
-                        : SizedBox(
-                            width: context.mediaQuery.size.width * 0.5,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  context
-                                      .read<SignUpCubit>()
-                                      .signUpWithEmailAndPassword();
-                                }
-                              },
-                              child: const Text('Sign Up'),
-                            ),
-                          ),
-                  );
-                },
-              ),
-              separator,
-            ],
-          ),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final nameInput =
+        context.select((SignUpCubit cubit) => cubit.state.nameInput);
+
+    return NameFormField(
+      controller: _nameController,
+      errorText: nameInput.invalid ? nameInput.error : null,
+    );
+  }
 }

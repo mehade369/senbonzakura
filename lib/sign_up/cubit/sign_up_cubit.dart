@@ -14,20 +14,15 @@ class SignUpCubit extends Cubit<SignUpState> {
         super(const SignUpState());
   final AuthRepository _authRepository;
 
-  // SignUpCubit({
-  //   required AuthRepository authRepository,
-  //   required UserRepository userRepository,
-  // })  : _authRepository = authRepository,
-  //       _userRepository = userRepository,
-  //       super(const SignUpState());
-
-  // final AuthRepository _authRepository;
-  // final UserRepository _userRepository;
-
   void emailChanged(String value) {
     final emailInput = EmailInput(value);
-    final status =
-        Formz.validate([emailInput, state.nameInput, state.passwordInput]);
+    final status = Formz.validate(
+      [
+        emailInput,
+        state.nameInput,
+        state.passwordInput,
+      ],
+    );
 
     emit(
       state.copyWith(
@@ -39,8 +34,13 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void phoneChanged(String value) {
     final phoneInput = PhoneInput(value);
-    final status =
-        Formz.validate([phoneInput, state.nameInput, state.passwordInput]);
+    final status = Formz.validate(
+      [
+        phoneInput,
+        state.nameInput,
+        state.passwordInput,
+      ],
+    );
 
     emit(
       state.copyWith(
@@ -60,8 +60,13 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void passwordChanged(String value) {
     final passwordInput = PasswordInput(value);
-    final status =
-        Formz.validate([state.nameInput, state.emailInput, passwordInput]);
+    final status = Formz.validate(
+      [
+        state.nameInput,
+        state.emailInput,
+        passwordInput,
+      ],
+    );
 
     emit(
       state.copyWith(
@@ -73,8 +78,9 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void nameChanged(String value) {
     final nameInput = NameInput(value);
-    final status =
-        Formz.validate([nameInput, state.emailInput, state.passwordInput]);
+    final status = Formz.validate(
+      [nameInput, state.emailInput, state.passwordInput],
+    );
 
     emit(
       state.copyWith(
