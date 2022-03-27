@@ -64,9 +64,9 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             separator,
-            EmailORPhone(),
+            const EmailORPhone(),
             separator,
-            Password(),
+            const Password(),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
@@ -76,7 +76,7 @@ class _SignInPageState extends State<SignInPage> {
                     MaterialPageRoute<void>(
                       builder: (_) => BlocProvider.value(
                         value: context.read<SignInCubit>(),
-                        child: ForgetPasswordPage(),
+                        child: const ForgetPasswordPage(),
                       ),
                     ),
                   );

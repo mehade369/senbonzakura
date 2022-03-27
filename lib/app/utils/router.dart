@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:senbonzakura/account/account.dart';
 import 'package:senbonzakura/cart/cart.dart';
-import 'package:senbonzakura/forget_password/forget_password.dart';
 import 'package:senbonzakura/home/home.dart';
 import 'package:senbonzakura/notifications/notifications.dart';
 import 'package:senbonzakura/product_details/product_details.dart';

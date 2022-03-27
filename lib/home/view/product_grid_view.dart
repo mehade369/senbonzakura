@@ -39,7 +39,7 @@ class ProductGridView extends StatelessWidget with UiLoggy {
                   context.goNamed(
                     App.productDetail,
                     params: {
-                      'productId': product.id.toString(),
+                      'productId': product.id,
                     },
                     extra: images,
                   );
