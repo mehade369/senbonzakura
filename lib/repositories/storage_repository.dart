@@ -42,7 +42,7 @@ class AppwriteStorageApi implements StorageApi {
       );
 
       log('result: ${result.toMap()}');
-    } on AppwriteException catch (e) {
+    } on AppwriteException {
       rethrow;
     }
   }

@@ -1,5 +1,4 @@
 import 'package:app_theme/app_theme.dart';
-import 'package:appwrite/appwrite.dart';
 import 'package:auth_repository/auth_repository.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
 import 'package:flutter/material.dart';
@@ -11,31 +10,27 @@ import 'package:senbonzakura/repositories/repositories.dart';
 class MyApp extends StatelessWidget {
   const MyApp({
     Key? key,
-    required this.productApi,
-    required this.authApi,
-    required this.storageApi,
+    required this.authRepository,
+    required this.storageRepository,
+    required this.productRepository,
   }) : super(key: key);
 
-  final ProductApi productApi;
-  final AuthApi authApi;
-  final StorageApi storageApi;
+  final AuthRepository authRepository;
+  final StorageRepository storageRepository;
+  final ProductRepository productRepository;
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(
-          create: (context) => ProductRepository(
-            productApi: productApi,
-          ),
+        RepositoryProvider.value(
+          value: authRepository,
         ),
-        RepositoryProvider(
-          create: (context) => AuthRepository(
-            authApi: authApi,
-          ),
+        RepositoryProvider.value(
+          value: storageRepository,
         ),
-        RepositoryProvider(
-          create: (context) => StorageRepository(storageApi),
+        RepositoryProvider.value(
+          value: productRepository,
         ),
       ],
       child: MultiBlocProvider(

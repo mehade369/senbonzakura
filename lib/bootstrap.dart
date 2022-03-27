@@ -12,6 +12,7 @@ import 'package:senbonzakura/repositories/repositories.dart';
 
 const separator = SizedBox(height: 20);
 
+// Depends on the API
 void bootstrap({
   required ProductApi productApi,
   required AuthApi authApi,
@@ -25,9 +26,15 @@ void bootstrap({
     );
   };
 
+  /// We instantiate the repositories here
+  /// We can to some initialization/ setup here with the repositories
+  final authRepository = AuthRepository(authApi: authApi);
+  final storageRepository = StorageRepository(storageApi);
+  final productRepository = ProductRepository(productApi: productApi);
+
   runZonedGuarded(
     () async {
-      final _storage = await HydratedStorage.build(
+      final storage = await HydratedStorage.build(
         storageDirectory: kIsWeb
             ? HydratedStorage.webStorageDirectory
             : await getApplicationDocumentsDirectory(),
@@ -37,14 +44,14 @@ void bootstrap({
         () async => runApp(
           ProviderScope(
             child: MyApp(
-              productApi: productApi,
-              authApi: authApi,
-              storageApi: storageApi,
+              authRepository: authRepository,
+              storageRepository: storageRepository,
+              productRepository: productRepository,
             ),
           ),
         ),
         blocObserver: AppBlocObserver(),
-        storage: _storage,
+        storage: storage,
       );
     },
     (error, stackTrace) => log(

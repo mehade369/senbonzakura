@@ -1,3 +1,5 @@
+// ignore_for_file: cast_nullable_to_non_nullable
+
 import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,9 +10,9 @@ import 'package:senbonzakura/home/home.dart';
 import 'package:senbonzakura/notifications/notifications.dart';
 import 'package:senbonzakura/product_details/product_details.dart';
 import 'package:senbonzakura/repositories/repositories.dart';
-import 'package:senbonzakura/repositories/storage_repository.dart';
 import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';
 import 'package:senbonzakura/search/search.dart';
+import 'package:senbonzakura/setting/setting.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
 import 'package:senbonzakura/sign_up/sign_up.dart';
 
@@ -22,6 +24,7 @@ abstract class App {
   static const signUpForm = 'sign_up_form';
   static const search = 'search';
   static const productDetail = 'product_detail';
+  static const setting = 'setting';
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -52,13 +55,18 @@ abstract class RouterX {
             ),
             BlocProvider(
               create: (_) => AccountBloc(
-                storageRepository: context.read<StorageRepository>(), 
+                storageRepository: context.read<StorageRepository>(),
               ),
             ),
           ],
           child: const RootNavigationStack(),
         ),
         routes: [
+          GoRoute(
+            path: App.setting,
+            name: App.setting,
+            builder: (context, state) => const SettingPage(),
+          ),
           GoRoute(
             name: App.productDetail,
             path: '${App.productDetail}/:productId',
