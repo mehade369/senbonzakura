@@ -33,54 +33,66 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return KScaffold(
-      child: Column(
-        children: [
-          Text(
-            'Enter your email or phone number',
-            style: context.textTheme.headlineSmall,
-            textAlign: TextAlign.center,
-          ),
-          separator,
-          ToggleSignUpMethod(
-            onChanged: onToggleChanged,
-            constraints: BoxConstraints(
-              maxWidth: context.mediaQuery.size.width * 0.5,
-              minHeight: context.mediaQuery.size.height / 20,
+    return BlocListener<SignUpCubit, SignUpState>(
+      listener: (context, state) {
+        if (state.status.isSubmissionSuccess) {
+          context.showSnackBarMessage('Sign in success');
+          context.goNamed(App.signIn);
+        }
+
+        if (state.status.isSubmissionFailure) {
+          context.showSnackBarMessage(state.error ?? 'Sign In Failed!');
+        }
+      },
+      child: KScaffold(
+        child: Column(
+          children: [
+            Text(
+              'Enter your email or phone number',
+              style: context.textTheme.headlineSmall,
+              textAlign: TextAlign.center,
             ),
-          ),
-          separator,
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (child, animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-            switchInCurve: Curves.easeInSine,
-            switchOutCurve: Curves.easeOutSine,
-            child: _signUpMethod == SignUpMethod.email
-                ? const Email(
-                    key: Key('email'),
-                  )
-                : const Phone(
-                    key: Key('phone'),
-                  ),
-          ),
-          separator,
-          const _Next(),
-          separator,
-          const ORWidget(),
-          separator,
-          // const SocialButtonRow(),
-          separator,
-          BottomAction(
-            text: 'Already have an account?',
-            action: 'Sign in',
-            onPressed: () => context.goNamed(App.signIn),
-          ),
-        ],
+            separator,
+            ToggleSignUpMethod(
+              onChanged: onToggleChanged,
+              constraints: BoxConstraints(
+                maxWidth: context.mediaQuery.size.width * 0.5,
+                minHeight: context.mediaQuery.size.height / 20,
+              ),
+            ),
+            separator,
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+              switchInCurve: Curves.easeInSine,
+              switchOutCurve: Curves.easeOutSine,
+              child: _signUpMethod == SignUpMethod.email
+                  ? const Email(
+                      key: Key('email'),
+                    )
+                  : const Phone(
+                      key: Key('phone'),
+                    ),
+            ),
+            separator,
+            const _Next(),
+            separator,
+            const ORWidget(),
+            separator,
+            // const SocialButtonRow(),
+            separator,
+            BottomAction(
+              text: 'Already have an account?',
+              action: 'Sign in',
+              onPressed: () => context.goNamed(App.signIn),
+            ),
+          ],
+        ),
       ),
     ).unFocus();
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -93,36 +95,41 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> signUpWithEmailAndPassword() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
 
-    // try {
-    // final user = _authRepository.signUpWithEmailAndPassword(
-    //   email: state.emailInput.value,
-    //   password: state.passwordInput.value,
-    //   name: state.nameInput.value,
-    // );
+    log('signUpWithEmailAndPassword $state');
 
-    // final user = _authRepository.currentUser();
+    try {
+      await _authRepository.signUpWithEmailAndPassword(
+        email: state.emailInput.value,
+        password: state.passwordInput.value,
+        name: state.nameInput.value,
+      );
 
-    // if (user != null) {
-    //   await _userRepository.createUserIfNotExists(
-    //     User(
-    //       email: user.email,
-    //       name: state.nameInput.value,
-    //       photoUrl: user.photoUrl,
-    //       uid: user.uid,
-    //     ),
-    //   );
-    // }
+      // final user = _authRepository.currentUser();
 
-    emit(state.copyWith(status: FormzStatus.submissionSuccess));
-    // }
-    // on AuthException catch (e) {
-    //   emit(
-    //     state.copyWith(
-    //       status: FormzStatus.submissionFailure,
-    //       error: e.message,
-    //     ),
-    //   );
-    // }
+      // if (user != null) {
+      //   await _userRepository.createUserIfNotExists(
+      //     User(
+      //       email: user.email,
+      //       name: state.nameInput.value,
+      //       photoUrl: user.photoUrl,
+      //       uid: user.uid,
+      //     ),
+      //   );
+      // }
+
+      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+    } on AuthException catch (e) {
+
+      log('SignUpCubit: $e');
+
+
+      emit(
+        state.copyWith(
+          status: FormzStatus.submissionFailure,
+          error: e.message,
+        ),
+      );
+    }
   }
 
   Future<void> signInWithGoogle() async {

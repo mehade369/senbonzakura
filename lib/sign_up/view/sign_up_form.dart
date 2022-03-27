@@ -17,8 +17,8 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) => KScaffold(
         child: Column(
-          children: [
-            const Align(
+          children: const [
+            Align(
               alignment: Alignment.centerLeft,
               child: TopHeading(
                 title: 'Sign Up',
@@ -26,9 +26,9 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
             ),
             separator,
-            const Name(),
+            Name(),
             separator,
-            const Password(),
+            Password(),
             separator,
             SignUpButton(),
             separator,
@@ -53,7 +53,9 @@ class SignUpButton extends StatelessWidget {
           : SizedBox(
               width: context.mediaQuery.size.width * 0.5,
               child: ElevatedButton(
-                onPressed: status.isValidated ? () {} : null,
+                onPressed: status.isValidated
+                    ? context.read<SignUpCubit>().signUpWithEmailAndPassword
+                    : null,
                 child: const Text('Sign Up'),
               ),
             ),

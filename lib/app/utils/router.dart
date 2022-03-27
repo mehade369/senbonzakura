@@ -26,7 +26,7 @@ abstract class App {
 // ignore: avoid_classes_with_only_static_members
 abstract class RouterX {
   static final router = GoRouter(
-    initialLocation: App.root,
+    initialLocation: '${App.root}${App.signIn}',
     debugLogDiagnostics: false,
     urlPathStrategy: UrlPathStrategy.path,
     routes: [
