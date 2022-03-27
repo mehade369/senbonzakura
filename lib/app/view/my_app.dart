@@ -1,4 +1,5 @@
 import 'package:app_theme/app_theme.dart';
+import 'package:appwrite/appwrite.dart';
 import 'package:auth_repository/auth_repository.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
 import 'package:flutter/material.dart';
@@ -12,10 +13,12 @@ class MyApp extends StatelessWidget {
     Key? key,
     required this.productApi,
     required this.authApi,
+    required this.storageApi,
   }) : super(key: key);
 
   final ProductApi productApi;
   final AuthApi authApi;
+  final StorageApi storageApi;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,9 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthRepository(
             authApi: authApi,
           ),
+        ),
+        RepositoryProvider(
+          create: (context) => StorageRepository(storageApi),
         ),
       ],
       child: MultiBlocProvider(

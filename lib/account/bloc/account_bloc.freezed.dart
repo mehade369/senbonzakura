@@ -872,10 +872,13 @@ class _$AccountStateTearOff {
   const _$AccountStateTearOff();
 
   _Initial initial(
-      {AvatarStatus avatarStatus = AvatarStatus.idle, String? avatarUrl}) {
+      {AvatarStatus avatarStatus = AvatarStatus.idle,
+      String? avatarUrl,
+      String? error}) {
     return _Initial(
       avatarStatus: avatarStatus,
       avatarUrl: avatarUrl,
+      error: error,
     );
   }
 }
@@ -887,21 +890,27 @@ const $AccountState = _$AccountStateTearOff();
 mixin _$AccountState {
   AvatarStatus get avatarStatus => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AvatarStatus avatarStatus, String? avatarUrl)
+    required TResult Function(
+            AvatarStatus avatarStatus, String? avatarUrl, String? error)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AvatarStatus avatarStatus, String? avatarUrl)? initial,
+    TResult Function(
+            AvatarStatus avatarStatus, String? avatarUrl, String? error)?
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AvatarStatus avatarStatus, String? avatarUrl)? initial,
+    TResult Function(
+            AvatarStatus avatarStatus, String? avatarUrl, String? error)?
+        initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -932,7 +941,7 @@ abstract class $AccountStateCopyWith<$Res> {
   factory $AccountStateCopyWith(
           AccountState value, $Res Function(AccountState) then) =
       _$AccountStateCopyWithImpl<$Res>;
-  $Res call({AvatarStatus avatarStatus, String? avatarUrl});
+  $Res call({AvatarStatus avatarStatus, String? avatarUrl, String? error});
 }
 
 /// @nodoc
@@ -947,6 +956,7 @@ class _$AccountStateCopyWithImpl<$Res> implements $AccountStateCopyWith<$Res> {
   $Res call({
     Object? avatarStatus = freezed,
     Object? avatarUrl = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       avatarStatus: avatarStatus == freezed
@@ -957,6 +967,10 @@ class _$AccountStateCopyWithImpl<$Res> implements $AccountStateCopyWith<$Res> {
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -966,7 +980,7 @@ abstract class _$InitialCopyWith<$Res> implements $AccountStateCopyWith<$Res> {
   factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
       __$InitialCopyWithImpl<$Res>;
   @override
-  $Res call({AvatarStatus avatarStatus, String? avatarUrl});
+  $Res call({AvatarStatus avatarStatus, String? avatarUrl, String? error});
 }
 
 /// @nodoc
@@ -982,6 +996,7 @@ class __$InitialCopyWithImpl<$Res> extends _$AccountStateCopyWithImpl<$Res>
   $Res call({
     Object? avatarStatus = freezed,
     Object? avatarUrl = freezed,
+    Object? error = freezed,
   }) {
     return _then(_Initial(
       avatarStatus: avatarStatus == freezed
@@ -992,6 +1007,10 @@ class __$InitialCopyWithImpl<$Res> extends _$AccountStateCopyWithImpl<$Res>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -999,17 +1018,20 @@ class __$InitialCopyWithImpl<$Res> extends _$AccountStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial({this.avatarStatus = AvatarStatus.idle, this.avatarUrl});
+  const _$_Initial(
+      {this.avatarStatus = AvatarStatus.idle, this.avatarUrl, this.error});
 
   @JsonKey()
   @override
   final AvatarStatus avatarStatus;
   @override
   final String? avatarUrl;
+  @override
+  final String? error;
 
   @override
   String toString() {
-    return 'AccountState.initial(avatarStatus: $avatarStatus, avatarUrl: $avatarUrl)';
+    return 'AccountState.initial(avatarStatus: $avatarStatus, avatarUrl: $avatarUrl, error: $error)';
   }
 
   @override
@@ -1019,14 +1041,16 @@ class _$_Initial implements _Initial {
             other is _Initial &&
             const DeepCollectionEquality()
                 .equals(other.avatarStatus, avatarStatus) &&
-            const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl));
+            const DeepCollectionEquality().equals(other.avatarUrl, avatarUrl) &&
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(avatarStatus),
-      const DeepCollectionEquality().hash(avatarUrl));
+      const DeepCollectionEquality().hash(avatarUrl),
+      const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -1036,28 +1060,33 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AvatarStatus avatarStatus, String? avatarUrl)
+    required TResult Function(
+            AvatarStatus avatarStatus, String? avatarUrl, String? error)
         initial,
   }) {
-    return initial(avatarStatus, avatarUrl);
+    return initial(avatarStatus, avatarUrl, error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(AvatarStatus avatarStatus, String? avatarUrl)? initial,
+    TResult Function(
+            AvatarStatus avatarStatus, String? avatarUrl, String? error)?
+        initial,
   }) {
-    return initial?.call(avatarStatus, avatarUrl);
+    return initial?.call(avatarStatus, avatarUrl, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AvatarStatus avatarStatus, String? avatarUrl)? initial,
+    TResult Function(
+            AvatarStatus avatarStatus, String? avatarUrl, String? error)?
+        initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(avatarStatus, avatarUrl);
+      return initial(avatarStatus, avatarUrl, error);
     }
     return orElse();
   }
@@ -1092,13 +1121,17 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements AccountState {
-  const factory _Initial({AvatarStatus avatarStatus, String? avatarUrl}) =
-      _$_Initial;
+  const factory _Initial(
+      {AvatarStatus avatarStatus,
+      String? avatarUrl,
+      String? error}) = _$_Initial;
 
   @override
   AvatarStatus get avatarStatus;
   @override
   String? get avatarUrl;
+  @override
+  String? get error;
   @override
   @JsonKey(ignore: true)
   _$InitialCopyWith<_Initial> get copyWith =>

@@ -6,3 +6,5 @@ A new Flutter project.
 
 [x] : Appwrite android config (androidmanifest.xml)
 [x] : internet permission (androidmanifest.xml)
+
+[x] : minSdk 21 

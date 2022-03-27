@@ -15,6 +15,7 @@ const separator = SizedBox(height: 20);
 void bootstrap({
   required ProductApi productApi,
   required AuthApi authApi,
+  required StorageApi storageApi,
 }) {
   FlutterError.onError = (details) {
     log(
@@ -26,7 +27,7 @@ void bootstrap({
 
   runZonedGuarded(
     () async {
-      final storage = await HydratedStorage.build(
+      final _storage = await HydratedStorage.build(
         storageDirectory: kIsWeb
             ? HydratedStorage.webStorageDirectory
             : await getApplicationDocumentsDirectory(),
@@ -38,11 +39,12 @@ void bootstrap({
             child: MyApp(
               productApi: productApi,
               authApi: authApi,
+              storageApi: storageApi,
             ),
           ),
         ),
         blocObserver: AppBlocObserver(),
-        storage: storage,
+        storage: _storage,
       );
     },
     (error, stackTrace) => log(

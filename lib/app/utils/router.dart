@@ -8,6 +8,7 @@ import 'package:senbonzakura/home/home.dart';
 import 'package:senbonzakura/notifications/notifications.dart';
 import 'package:senbonzakura/product_details/product_details.dart';
 import 'package:senbonzakura/repositories/repositories.dart';
+import 'package:senbonzakura/repositories/storage_repository.dart';
 import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';
 import 'package:senbonzakura/search/search.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
@@ -50,7 +51,9 @@ abstract class RouterX {
               create: (_) => NotificationsBloc(),
             ),
             BlocProvider(
-              create: (_) => AccountBloc(),
+              create: (_) => AccountBloc(
+                storageRepository: context.read<StorageRepository>(), 
+              ),
             ),
           ],
           child: const RootNavigationStack(),
