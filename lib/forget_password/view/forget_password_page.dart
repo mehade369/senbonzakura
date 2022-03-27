@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:q_form/q_form.dart';
 import 'package:senbonzakura/bootstrap.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
@@ -36,6 +37,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                   return null;
                 },
               ),
+
               separator,
               // Consumer(
               //   builder: (context, ref, _) {

@@ -37,6 +37,19 @@ class SignUpCubit extends Cubit<SignUpState> {
     );
   }
 
+  void phoneChanged(String value) {
+    final phoneInput = PhoneInput(value);
+    final status =
+        Formz.validate([phoneInput, state.nameInput, state.passwordInput]);
+
+    emit(
+      state.copyWith(
+        phoneInput: phoneInput,
+        status: status,
+      ),
+    );
+  }
+
   void passwordChanged(String value) {
     final passwordInput = PasswordInput(value);
     final status =

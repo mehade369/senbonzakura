@@ -7,6 +7,7 @@ import 'package:milky_way/milky_way.dart';
 import 'package:q_form/q_form.dart';
 import 'package:senbonzakura/app/app.dart';
 import 'package:senbonzakura/bootstrap.dart';
+import 'package:senbonzakura/forget_password/forget_password.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
 
 class SignInPage extends StatefulWidget {
@@ -63,36 +64,22 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             separator,
-            BlocBuilder<SignInCubit, SignInState>(
-              buildWhen: (previous, current) =>
-                  previous.emailOrPhoneInput != current.emailOrPhoneInput,
-              builder: (context, state) {
-                return EmailORPhoneFormField(
-                  onChanged: context.read<SignInCubit>().emailOrPhoneChanged,
-                  errorText: state.emailOrPhoneInput.invalid
-                      ? state.emailOrPhoneInput.error
-                      : null,
-                );
-              },
-            ),
+            EmailORPhone(),
             separator,
-            BlocBuilder<SignInCubit, SignInState>(
-              buildWhen: (previous, current) =>
-                  previous.passwordInput != current.passwordInput,
-              builder: (context, state) {
-                return PasswordFormField(
-                  onChanged: context.read<SignInCubit>().passwordChanged,
-                  errorText: state.passwordInput.invalid
-                      ? state.passwordInput.error
-                      : null,
-                );
-              },
-            ),
+            Password(),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  context.goNamed(App.forgetPassword);
+                  // context.goNamed(App.forgetPassword);
+                  context.navigator.push<void>(
+                    MaterialPageRoute<void>(
+                      builder: (_) => BlocProvider.value(
+                        value: context.read<SignInCubit>(),
+                        child: ForgetPasswordPage(),
+                      ),
+                    ),
+                  );
                 },
                 child: const Text('Forgot password?'),
               ),
@@ -122,6 +109,84 @@ class _SignInPageState extends State<SignInPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class Password extends StatefulWidget {
+  const Password({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<Password> createState() => _PasswordState();
+}
+
+class _PasswordState extends State<Password> {
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _passwordController.addListener(() {
+      context.read<SignInCubit>().passwordChanged(_passwordController.text);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final passwordInput =
+        context.select((SignInCubit cubit) => cubit.state.passwordInput);
+
+    return PasswordFormField(
+      controller: _passwordController,
+      // onChanged: context.read<SignInCubit>().passwordChanged,
+      errorText: passwordInput.invalid ? passwordInput.error : null,
+    );
+  }
+}
+
+class EmailORPhone extends StatefulWidget {
+  const EmailORPhone({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<EmailORPhone> createState() => _EmailORPhoneState();
+}
+
+class _EmailORPhoneState extends State<EmailORPhone> {
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _emailController.addListener(() {
+      context.read<SignInCubit>().emailOrPhoneChanged(_emailController.text);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final emailOrPhoneInput =
+        context.select((SignInCubit cubit) => cubit.state.emailOrPhoneInput);
+
+    return EmailORPhoneFormField(
+      controller: _emailController,
+      // onChanged: context.read<SignInCubit>().emailOrPhoneChanged,
+      errorText: emailOrPhoneInput.invalid ? emailOrPhoneInput.error : null,
     );
   }
 }

@@ -20,12 +20,14 @@ class _$SignUpStateTearOff {
 
   _SignUpState call(
       {EmailInput emailInput = const EmailInput.pure(),
+      PhoneInput phoneInput = const PhoneInput.pure(),
       PasswordInput passwordInput = const PasswordInput.pure(),
       NameInput nameInput = const NameInput.pure(),
       FormzStatus status = FormzStatus.pure,
       String? error}) {
     return _SignUpState(
       emailInput: emailInput,
+      phoneInput: phoneInput,
       passwordInput: passwordInput,
       nameInput: nameInput,
       status: status,
@@ -40,6 +42,7 @@ const $SignUpState = _$SignUpStateTearOff();
 /// @nodoc
 mixin _$SignUpState {
   EmailInput get emailInput => throw _privateConstructorUsedError;
+  PhoneInput get phoneInput => throw _privateConstructorUsedError;
   PasswordInput get passwordInput => throw _privateConstructorUsedError;
   NameInput get nameInput => throw _privateConstructorUsedError;
   FormzStatus get status => throw _privateConstructorUsedError;
@@ -57,6 +60,7 @@ abstract class $SignUpStateCopyWith<$Res> {
       _$SignUpStateCopyWithImpl<$Res>;
   $Res call(
       {EmailInput emailInput,
+      PhoneInput phoneInput,
       PasswordInput passwordInput,
       NameInput nameInput,
       FormzStatus status,
@@ -74,6 +78,7 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
   @override
   $Res call({
     Object? emailInput = freezed,
+    Object? phoneInput = freezed,
     Object? passwordInput = freezed,
     Object? nameInput = freezed,
     Object? status = freezed,
@@ -84,6 +89,10 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
           ? _value.emailInput
           : emailInput // ignore: cast_nullable_to_non_nullable
               as EmailInput,
+      phoneInput: phoneInput == freezed
+          ? _value.phoneInput
+          : phoneInput // ignore: cast_nullable_to_non_nullable
+              as PhoneInput,
       passwordInput: passwordInput == freezed
           ? _value.passwordInput
           : passwordInput // ignore: cast_nullable_to_non_nullable
@@ -113,6 +122,7 @@ abstract class _$SignUpStateCopyWith<$Res>
   @override
   $Res call(
       {EmailInput emailInput,
+      PhoneInput phoneInput,
       PasswordInput passwordInput,
       NameInput nameInput,
       FormzStatus status,
@@ -132,6 +142,7 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? emailInput = freezed,
+    Object? phoneInput = freezed,
     Object? passwordInput = freezed,
     Object? nameInput = freezed,
     Object? status = freezed,
@@ -142,6 +153,10 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
           ? _value.emailInput
           : emailInput // ignore: cast_nullable_to_non_nullable
               as EmailInput,
+      phoneInput: phoneInput == freezed
+          ? _value.phoneInput
+          : phoneInput // ignore: cast_nullable_to_non_nullable
+              as PhoneInput,
       passwordInput: passwordInput == freezed
           ? _value.passwordInput
           : passwordInput // ignore: cast_nullable_to_non_nullable
@@ -167,6 +182,7 @@ class __$SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
 class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
   const _$_SignUpState(
       {this.emailInput = const EmailInput.pure(),
+      this.phoneInput = const PhoneInput.pure(),
       this.passwordInput = const PasswordInput.pure(),
       this.nameInput = const NameInput.pure(),
       this.status = FormzStatus.pure,
@@ -175,6 +191,9 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
   @JsonKey()
   @override
   final EmailInput emailInput;
+  @JsonKey()
+  @override
+  final PhoneInput phoneInput;
   @JsonKey()
   @override
   final PasswordInput passwordInput;
@@ -189,7 +208,7 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignUpState(emailInput: $emailInput, passwordInput: $passwordInput, nameInput: $nameInput, status: $status, error: $error)';
+    return 'SignUpState(emailInput: $emailInput, phoneInput: $phoneInput, passwordInput: $passwordInput, nameInput: $nameInput, status: $status, error: $error)';
   }
 
   @override
@@ -198,6 +217,7 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
     properties
       ..add(DiagnosticsProperty('type', 'SignUpState'))
       ..add(DiagnosticsProperty('emailInput', emailInput))
+      ..add(DiagnosticsProperty('phoneInput', phoneInput))
       ..add(DiagnosticsProperty('passwordInput', passwordInput))
       ..add(DiagnosticsProperty('nameInput', nameInput))
       ..add(DiagnosticsProperty('status', status))
@@ -212,6 +232,8 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
             const DeepCollectionEquality()
                 .equals(other.emailInput, emailInput) &&
             const DeepCollectionEquality()
+                .equals(other.phoneInput, phoneInput) &&
+            const DeepCollectionEquality()
                 .equals(other.passwordInput, passwordInput) &&
             const DeepCollectionEquality().equals(other.nameInput, nameInput) &&
             const DeepCollectionEquality().equals(other.status, status) &&
@@ -222,6 +244,7 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(emailInput),
+      const DeepCollectionEquality().hash(phoneInput),
       const DeepCollectionEquality().hash(passwordInput),
       const DeepCollectionEquality().hash(nameInput),
       const DeepCollectionEquality().hash(status),
@@ -236,6 +259,7 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
 abstract class _SignUpState implements SignUpState {
   const factory _SignUpState(
       {EmailInput emailInput,
+      PhoneInput phoneInput,
       PasswordInput passwordInput,
       NameInput nameInput,
       FormzStatus status,
@@ -243,6 +267,8 @@ abstract class _SignUpState implements SignUpState {
 
   @override
   EmailInput get emailInput;
+  @override
+  PhoneInput get phoneInput;
   @override
   PasswordInput get passwordInput;
   @override

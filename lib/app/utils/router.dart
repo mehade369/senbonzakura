@@ -34,7 +34,7 @@ abstract class RouterX {
       GoRoute(
         path: App.root,
         name: App.root,
-        builder: (_, state) => MultiBlocProvider(
+        builder: (context, state) => MultiBlocProvider(
           providers: [
             BlocProvider(
               create: (_) => RootNavigationStackCubit(),
@@ -116,13 +116,16 @@ abstract class RouterX {
               ],
               child: const SignInPage(),
             ),
-            routes: [
-              GoRoute(
-                path: App.forgetPassword,
-                name: App.forgetPassword,
-                builder: (_, state) => const ForgetPasswordPage(),
-              ),
-            ],
+            // routes: [
+            //   GoRoute(
+            //     path: App.forgetPassword,
+            //     name: App.forgetPassword,
+            //     builder: (context, state) => BlocProvider.value(
+            //       value: context.read<SignInCubit>(),
+            //       child: ForgetPasswordPage(),
+            //     ),
+            //   ),
+            // ],
           ),
           GoRoute(
             path: App.signUp,
@@ -137,13 +140,13 @@ abstract class RouterX {
               ],
               child: const SignUpPage(),
             ),
-            routes: [
-              GoRoute(
-                path: App.signUpForm,
-                name: App.signUpForm,
-                builder: (_, state) => const SignUpForm(),
-              ),
-            ],
+            // routes: [
+            //   GoRoute(
+            //     path: App.signUpForm,
+            //     name: App.signUpForm,
+            //     builder: (_, state) => const SignUpForm(),
+            //   ),
+            // ],
           ),
         ],
       ),
