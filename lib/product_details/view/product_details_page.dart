@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:milky_way/milky_way.dart';
 import 'package:senbonzakura/app/utils/utils.dart';
 import 'package:senbonzakura/product_details/product_details.dart';
-import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   const ProductDetailsPage({

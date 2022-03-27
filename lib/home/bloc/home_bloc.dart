@@ -12,8 +12,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
     required ProductRepository productRepository,
-  })  : _productRepository = productRepository,
-        super(const _Loading()) {
+  }) : super(const _Loading()) {
     on<_Started>((event, emit) async {
       await Future<void>.delayed(const Duration(seconds: 2));
 
@@ -24,6 +23,4 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(_Success(products: data));
     });
   }
-
-  final ProductRepository _productRepository;
 }

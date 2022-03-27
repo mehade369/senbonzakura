@@ -11,6 +11,12 @@
     },
     {
       "path": "../packages/app_theme"
+    },
+    {
+      "path": "../packages/log_pose"
+    },
+    {
+      "path": "../packages/galaxy_lints"
     }
   ],
   "settings": {

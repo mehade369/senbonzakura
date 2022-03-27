@@ -2,6 +2,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="dev.mehade.senbonzakura"
 >
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
     android:label="senbonzakura"
     android:name="${applicationName}"

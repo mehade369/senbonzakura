@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:milky_way/milky_way.dart';
-import 'package:pageviewj/pageviewj.dart';
 
 class HeroSlider extends StatefulWidget {
   const HeroSlider({

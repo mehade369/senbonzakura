@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:milky_way/milky_way.dart';
 
 class PriceTag extends StatelessWidget {

@@ -39,9 +39,30 @@ class LocalProductApi implements ProductApi {
         currentStockCount: 5,
         price: 599,
       ),
+      ProductPreview(
+        id: '6',
+        name: 'Samsung A50 Galaxy A50 64GB',
+        thumbnailImage: images.elementAt(5),
+        currentStockCount: 5,
+        price: 599,
+      ),
+      ProductPreview(
+        id: '7',
+        name: 'Samsung A50 Galaxy A50 64GB',
+        thumbnailImage: 'https://picsum.photos/200/300',
+        currentStockCount: 5,
+        price: 599,
+      ),
+      ProductPreview(
+        id: '8',
+        name: 'Samsung A50 Galaxy A50 64GB',
+        thumbnailImage: 'https://picsum.photos/200/300',
+        currentStockCount: 5,
+        price: 599,
+      ),
     ];
 
-    await Future<void>.delayed(Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
 
     return products;
   }
@@ -66,7 +87,7 @@ class AppwriteProductApi implements ProductApi {
       });
 
       return data;
-    } on AppwriteException catch (e) {
+    } on AppwriteException {
       rethrow;
     }
   }

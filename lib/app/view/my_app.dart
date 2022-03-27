@@ -1,5 +1,4 @@
 import 'package:app_theme/app_theme.dart';
-import 'package:appwrite/appwrite.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

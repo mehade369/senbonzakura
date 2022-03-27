@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:milky_way/milky_way.dart';
 import 'package:senbonzakura/app/app.dart';
 import 'package:senbonzakura/cart/cart.dart';
-import 'package:senbonzakura/cart/widgets/widgets.dart';
 import 'package:senbonzakura/modals/modals.dart';
 import 'package:senbonzakura/repositories/repositories.dart';
 import 'package:senbonzakura/root_navigation_stack/root_navigation_stack.dart';

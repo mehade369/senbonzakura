@@ -67,11 +67,11 @@ class AccountPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'John Doe',
+                    'Mehade',
                     style: context.textTheme.bodyLarge,
                   ),
                   Text(
-                    '@johndoe',
+                    '@mehade369',
                     style: context.textTheme.caption,
                   ),
                 ],

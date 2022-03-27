@@ -8,7 +8,6 @@ part 'account_bloc.freezed.dart';
 class AccountBloc extends Bloc<AccountEvent, AccountState> {
   AccountBloc() : super(_Initial()) {
     on<AccountEvent>((event, emit) {
-      // TODO: implement event handler
     });
   }
 }

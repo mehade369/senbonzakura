@@ -19,10 +19,12 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
           ),
         );
 
-  void fetchProductDetails(int productId) {
-    Future.delayed(const Duration(seconds: 2), () async {
-      final data = _productRepository.getProductDetails(productId);
-    });
+  Future<void> fetchProductDetails(int productId) async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+
+    final data = await _productRepository.getProductDetails(productId);
+
+    emit(_Loaded(data));
   }
 
   final ProductRepository _productRepository;
