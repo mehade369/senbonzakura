@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,7 +10,12 @@ part 'sign_in_cubit.freezed.dart';
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
-  SignInCubit() : super(const SignInState());
+  SignInCubit({
+    required AuthRepository authRepository,
+  })  : _authRepository = authRepository,
+        super(const SignInState());
+
+  final AuthRepository _authRepository;
 
   // SignInCubit({
   //   required AuthRepository authRepository,
@@ -53,14 +59,25 @@ class SignInCubit extends Cubit<SignInState> {
         ),
       );
 
-      await Future<void>.delayed(const Duration(seconds: 2));
+      try {
+        await _authRepository.signInWithEmailAndPassword(
+          email: state.emailOrPhoneInput.value,
+          password: state.passwordInput.value,
+        );
 
-      emit(
-        state.copyWith(
-          status: FormzStatus.submissionFailure,
-          error: 'Some Server Error',
-        ),
-      );
+        emit(
+          state.copyWith(
+            status: FormzStatus.submissionSuccess,
+          ),
+        );
+      } on AuthException catch (e) {
+        emit(
+          state.copyWith(
+            status: FormzStatus.submissionFailure,
+            error: e.message,
+          ),
+        );
+      }
     }
   }
 

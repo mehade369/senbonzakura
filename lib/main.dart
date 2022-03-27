@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:log_pose/log_pose.dart';
 import 'package:senbonzakura/bootstrap.dart';
@@ -19,5 +20,10 @@ Future<void> main() async {
     ..setProject('62352983edc3fbbd013f')
     ..setSelfSigned(status: true);
 
-  bootstrap(productApi: LocalProductApi());
+  final account = Account(client);
+
+  bootstrap(
+    productApi: LocalProductApi(),
+    authApi: AppwriteAuthApi(account: account),
+  );
 }

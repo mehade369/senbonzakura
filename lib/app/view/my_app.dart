@@ -1,4 +1,5 @@
 import 'package:app_theme/app_theme.dart';
+import 'package:auth_repository/auth_repository.dart';
 import 'package:device_preview/device_preview.dart' show DevicePreview;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +8,14 @@ import 'package:senbonzakura/l10n/l10n.dart';
 import 'package:senbonzakura/repositories/repositories.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.productApi}) : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.productApi,
+    required this.authApi,
+  }) : super(key: key);
 
   final ProductApi productApi;
+  final AuthApi authApi;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,11 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => ProductRepository(
             productApi: productApi,
+          ),
+        ),
+        RepositoryProvider(
+          create: (context) => AuthRepository(
+            authApi: authApi,
           ),
         ),
       ],

@@ -17,6 +17,9 @@
     },
     {
       "path": "../packages/galaxy_lints"
+    },
+    {
+      "path": "../packages/auth_repository"
     }
   ],
   "settings": {

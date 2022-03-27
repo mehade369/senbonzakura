@@ -49,7 +49,7 @@ class _SignInPageState extends State<SignInPage> {
         }
 
         if (state.status.isSubmissionFailure) {
-          context.showSnackBarMessage('Sign in failed');
+          context.showSnackBarMessage(state.error ?? 'Sign In Failed!');
         }
       },
       child: KScaffold(

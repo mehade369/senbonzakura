@@ -50,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
+  auth_repository:
+    dependency: "direct main"
+    description:
+      path: "/home/maverick/Projects/legion/packages/auth_repository"
+      relative: false
+    source: path
+    version: "0.0.1"
   badges:
     dependency: transitive
     description:

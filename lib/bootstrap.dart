@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,10 @@ import 'package:senbonzakura/repositories/repositories.dart';
 
 const separator = SizedBox(height: 20);
 
-void bootstrap({required ProductApi productApi}) {
+void bootstrap({
+  required ProductApi productApi,
+  required AuthApi authApi,
+}) {
   FlutterError.onError = (details) {
     log(
       details.exceptionAsString(),
@@ -33,6 +37,7 @@ void bootstrap({required ProductApi productApi}) {
           ProviderScope(
             child: MyApp(
               productApi: productApi,
+              authApi: authApi,
             ),
           ),
         ),

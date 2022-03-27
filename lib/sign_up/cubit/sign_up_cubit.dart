@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -7,7 +8,11 @@ part 'sign_up_cubit.freezed.dart';
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit() : super(const SignUpState());
+  SignUpCubit({
+    required AuthRepository authRepository,
+  })  : _authRepository = authRepository,
+        super(const SignUpState());
+  final AuthRepository _authRepository;
 
   // SignUpCubit({
   //   required AuthRepository authRepository,

@@ -1,3 +1,4 @@
+import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -108,7 +109,9 @@ abstract class RouterX {
             builder: (_, state) => MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (_) => SignInCubit(),
+                  create: (context) => SignInCubit(
+                    authRepository: context.read<AuthRepository>(),
+                  ),
                 ),
               ],
               child: const SignInPage(),
@@ -127,7 +130,9 @@ abstract class RouterX {
             builder: (context, state) => MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (_) => SignUpCubit(),
+                  create: (_) => SignUpCubit(
+                    authRepository: context.read<AuthRepository>(),
+                  ),
                 ),
               ],
               child: const SignUpPage(),

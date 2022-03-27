@@ -11,6 +11,8 @@ dependencies:
   app_theme: 
     path: /home/maverick/Projects/legion/packages/app_theme
   appwrite: ^4.0.1
+  auth_repository: 
+    path: /home/maverick/Projects/legion/packages/auth_repository
   bloc: ^8.0.3
   connectivity_plus: ^2.2.1
   flex_color_scheme: ^5.0.0-dev.1
