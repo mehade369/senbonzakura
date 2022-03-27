@@ -1,4 +1,4 @@
-include: package:galaxy_lints/flutter.yaml
+include: package:galaxy_lints/lints.yaml
 
 # REST OF YOUR ANALYSIS_OPTIONS.YAML FILE
 analyzer:

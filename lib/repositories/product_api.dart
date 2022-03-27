@@ -46,14 +46,14 @@ class LocalProductApi implements ProductApi {
         currentStockCount: 5,
         price: 599,
       ),
-      ProductPreview(
+      const ProductPreview(
         id: '7',
         name: 'Samsung A50 Galaxy A50 64GB',
         thumbnailImage: 'https://picsum.photos/200/300',
         currentStockCount: 5,
         price: 599,
       ),
-      ProductPreview(
+      const ProductPreview(
         id: '8',
         name: 'Samsung A50 Galaxy A50 64GB',
         thumbnailImage: 'https://picsum.photos/200/300',
