@@ -80,7 +80,6 @@ class CartItemCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 8),
           ],
         ),
       ),

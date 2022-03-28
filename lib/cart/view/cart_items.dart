@@ -94,6 +94,7 @@ class _NewWidgetState extends State<CartItems> {
   @override
   Widget build(BuildContext context) {
     return AnimatedList(
+      padding: const EdgeInsets.symmetric(horizontal: kPadding),
       key: _listKey,
       itemBuilder: (context, index, animation) {
         final product = widget.cart.items.elementAt(index);
