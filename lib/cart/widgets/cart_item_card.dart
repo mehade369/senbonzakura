@@ -34,7 +34,7 @@ class CartItemCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 4),
+            const SizedBox(width: 8),
             Expanded(
               flex: 4,
               child: Column(
@@ -65,18 +65,22 @@ class CartItemCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 4),
+            const SizedBox(width: 8),
             Flexible(
               flex: 2,
               child: AspectRatio(
-                aspectRatio: 1,
-                child: CartStepper(
-                  count: item.quantity,
-                  maxCount: item.currentStockCount,
-                  onCounterChanged: onQuantityChange,
+                aspectRatio: 2.1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CartStepper(
+                    count: item.quantity,
+                    maxCount: item.currentStockCount,
+                    onCounterChanged: onQuantityChange,
+                  ),
                 ),
               ),
             ),
+            const SizedBox(width: 8),
           ],
         ),
       ),

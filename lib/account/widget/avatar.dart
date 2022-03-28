@@ -15,7 +15,7 @@ class Avatar extends StatelessWidget {
   final double width;
 
   void showSourceOptions(BuildContext context) {
-    showBottomSheet<void>(
+    showModalBottomSheet<void>(
       context: context,
       builder: (_) => Column(
         mainAxisSize: MainAxisSize.min,

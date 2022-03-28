@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:log_pose/log_pose.dart';
 import 'package:milky_way/milky_way.dart';
-import 'package:senbonzakura/app/app.dart';
 import 'package:senbonzakura/cart/cart.dart';
 
 class CartPage extends StatelessWidget with UiLoggy {
@@ -31,10 +30,7 @@ class CartPage extends StatelessWidget with UiLoggy {
                   child: Center(child: Text('Error: ${e.message}')),
                 ),
               ),
-              loaded: (_) => const Padding(
-                padding: kPaddingAll,
-                child: CartListView(),
-              ),
+              loaded: (_) => const CartListView(),
             ),
           );
         },

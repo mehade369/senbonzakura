@@ -14,14 +14,13 @@ class AccountPage extends StatelessWidget {
     return BlocListener<AccountBloc, AccountState>(
       listener: (context, state) {
         if (state.avatarStatus == AvatarStatus.uploaded) {
-          // context.navigator.pop();
+          context.showSnackBarMessage('Avatar uploaded successfully');
         }
 
         if (state.avatarStatus == AvatarStatus.failed) {
           context.showSnackBarMessage(
             state.error ?? 'Failed to upload avatar',
           );
-          // context.navigator.pop();
         }
       },
       child: Scaffold(
@@ -66,29 +65,88 @@ class AccountPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        Box(
-                          label: 'My Cart',
-                          value: '20',
-                        ),
-                        Box(
-                          label: 'My Wishlist',
-                          value: '7',
-                        ),
-                        Box(
-                          label: 'Watching',
-                          value: '12',
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+            const _Section(
+              children: [
+                _Tile(
+                  option: _Option(
+                    title: Text('Your Orders'),
+                    leading: Icons.shopping_bag_outlined,
+                  ),
+                ),
+                _Tile(
+                  option: _Option(
+                    title: Text('Notifications'),
+                    leading: Icons.notifications_outlined,
+                  ),
+                ),
+                _Tile(
+                  option: _Option(
+                    title: Text('Wishlist'),
+                    leading: Icons.favorite_outline_outlined,
+                  ),
+                ),
+              ],
+            ),
+            const Divider(),
+            const _Section(
+              title: 'Rewards & Promotions',
+              children: [
+                _Tile(
+                  option: _Option(
+                    title: Text('Rewards'),
+                    leading: Icons.card_giftcard_outlined,
+                  ),
+                ),
+                _Tile(
+                  option: _Option(
+                    title: Text('Promotions'),
+                    leading: Icons.local_offer_outlined,
+                  ),
+                ),
+              ],
+            ),
+            const Divider(),
+            const _Section(
+              title: 'Help & Support',
+              children: [
+                _Tile(
+                  option: _Option(
+                    title: Text('Customer Support'),
+                    leading: Icons.question_answer_outlined,
+                  ),
+                ),
+                _Tile(
+                  option: _Option(
+                    title: Text('Frequently Asked Questions'),
+                    leading: Icons.question_mark_outlined,
+                  ),
+                ),
+              ],
+            ),
+            const Divider(),
+            const _Section(
+              title: 'Legal & Privacy',
+              children: [
+                _Tile(
+                  option: _Option(
+                    title: Text('Privacy Policy'),
+                    leading: Icons.lock_outlined,
+                  ),
+                ),
+                _Tile(
+                  option: _Option(
+                    title: Text('Terms of Service'),
+                    leading: Icons.text_snippet_rounded,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ).unFocus(),
@@ -96,30 +154,64 @@ class AccountPage extends StatelessWidget {
   }
 }
 
-class Box extends StatelessWidget {
-  const Box({
+class _Section extends StatelessWidget {
+  const _Section({
     Key? key,
-    required this.value,
-    required this.label,
+    this.title,
+    required this.children,
   }) : super(key: key);
 
-  final String value;
-  final String label;
+  final String? title;
+  final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
+    final style = context.textTheme.bodyLarge?.copyWith(
+      fontWeight: FontWeight.bold,
+    );
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          value,
-          style: context.textTheme.bodyLarge,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          label,
-          style: context.textTheme.bodyLarge,
-        ),
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: Text(
+              title!,
+              style: style,
+            ),
+          ),
+        ...children,
       ],
     );
   }
+}
+
+class _Option {
+  const _Option({
+    required this.leading,
+    required this.title,
+    this.trailing,
+  });
+
+  final IconData leading;
+  final Widget title;
+  final Widget? trailing;
+}
+
+class _Tile extends StatelessWidget {
+  const _Tile({
+    Key? key,
+    required this.option,
+  }) : super(key: key);
+
+  final _Option option;
+
+  @override
+  Widget build(BuildContext context) => ListTile(
+        dense: true,
+        leading: Icon(option.leading),
+        title: option.title,
+        trailing: option.trailing,
+      );
 }

@@ -26,13 +26,13 @@ class ProductGridView extends StatelessWidget with UiLoggy {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final product = products.elementAt(index);
-            final _heightX =
+            final height =
                 context.mediaQuery.size.height / 4 + Random().nextInt(50);
 
             return SizedBox(
-              height: ((index % 3) + 1) * _heightX >= 300
+              height: ((index % 3) + 1) * height >= 300
                   ? 300
-                  : ((index % 3) + 1) * _heightX,
+                  : ((index % 3) + 1) * height,
               child: ProductCard(
                 product: product,
                 onTap: () {
