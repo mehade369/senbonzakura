@@ -33,7 +33,7 @@ class ProductDetailsPage extends StatelessWidget {
               return ListView(
                 children: [
                   Hero(
-                    tag: productId,
+                    tag: 'ProductCard-$productId',
                     child: Material(
                       child: AspectRatio(
                         aspectRatio: 1.5,

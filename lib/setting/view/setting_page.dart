@@ -37,19 +37,26 @@ class SettingPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Setting'),
       ),
-      body: ListView.separated(
-        itemCount: _settings.length,
-        itemBuilder: (context, index) {
-          final setting = _settings[index];
-
-          return InkWell(
-            onTap: () => context.showSnackBarMessage('Coming soon ...'),
-            child: _SettingTile(
+      body: ListView(
+        children: [
+          ..._settings.map(
+            (setting) => _SettingTile(
               setting: setting,
+              onTap: () {
+                context.showSnackBarMessage('Coming soon...');
+              },
             ),
-          );
-        },
-        separatorBuilder: (context, index) => const Divider(height: 0),
+          ),
+          _SettingTile(
+            setting: const _Setting(
+              title: 'Logout',
+              icon: Icons.exit_to_app,
+            ),
+            onTap: () {
+              context.showSnackBarMessage('Logout');
+            },
+          ),
+        ],
       ),
     );
   }
@@ -71,18 +78,28 @@ class _SettingTile extends StatelessWidget {
     Key? key,
     required this.setting,
     this.trailing,
+    this.onTap,
   }) : super(key: key);
 
   final _Setting setting;
   final Widget? trailing;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      dense: true,
-      leading: Icon(setting.icon),
-      title: Text(setting.title),
-      trailing: trailing,
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          ListTile(
+            dense: true,
+            leading: Icon(setting.icon),
+            title: Text(setting.title),
+            trailing: trailing,
+          ),
+          const Divider(height: 4),
+        ],
+      ),
     );
   }
 }

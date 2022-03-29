@@ -19,7 +19,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: product.id,
+      tag: 'ProductCard-${product.id}',
       child: Card(
         margin: EdgeInsets.zero,
         elevation: 4,
