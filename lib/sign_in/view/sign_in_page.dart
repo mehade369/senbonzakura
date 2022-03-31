@@ -46,7 +46,7 @@ class _SignInPageState extends State<SignInPage> {
       listener: (context, state) {
         if (state.status.isSubmissionSuccess) {
           context.showSnackBarMessage('Sign in success');
-          context.goNamed(App.root);
+          context.goNamed(RouteName.root);
         }
 
         if (state.status.isSubmissionFailure) {
@@ -71,7 +71,7 @@ class _SignInPageState extends State<SignInPage> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  // context.goNamed(App.forgetPassword);
+                  // context.goNamed(RouteName.forgetPassword);
                   context.navigator.push<void>(
                     MaterialPageRoute<void>(
                       builder: (_) => BlocProvider.value(
@@ -103,7 +103,7 @@ class _SignInPageState extends State<SignInPage> {
               text: "Don't have an account?",
               action: 'Sign up',
               onPressed: () {
-                context.goNamed(App.signUp);
+                context.goNamed(RouteName.signUp);
               },
             ),
           ],

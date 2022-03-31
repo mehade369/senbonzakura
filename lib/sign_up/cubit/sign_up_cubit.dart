@@ -119,9 +119,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on AuthException catch (e) {
-
       log('SignUpCubit: $e');
-
 
       emit(
         state.copyWith(

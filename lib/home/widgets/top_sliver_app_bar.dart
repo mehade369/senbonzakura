@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:senbonzakura/app/utils/utils.dart';
+import 'package:senbonzakura/app/app.dart';
 import 'package:senbonzakura/search/search.dart';
 
 class TopSliverAppBar extends StatelessWidget {
@@ -15,7 +15,7 @@ class TopSliverAppBar extends StatelessWidget {
       snap: true,
       pinned: false,
       title: TopSearchBar.readOnly(
-        onTap: () => context.goNamed(App.search),
+        onTap: () => context.goNamed(RouteName.search),
       ),
       actions: [
         IconButton(

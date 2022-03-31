@@ -140,7 +140,7 @@ class _NewWidgetState extends State<CartItems> {
                 },
                 onTap: () {
                   context.goNamed(
-                    App.productDetail,
+                    RouteName.productDetail,
                     params: {
                       'productId': product.id.toString(),
                     },

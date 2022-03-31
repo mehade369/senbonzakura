@@ -13,11 +13,13 @@ class MyApp extends StatelessWidget {
     required this.authRepository,
     required this.storageRepository,
     required this.productRepository,
+    required this.cartRepository,
   }) : super(key: key);
 
   final AuthRepository authRepository;
   final StorageRepository storageRepository;
   final ProductRepository productRepository;
+  final CartRepository cartRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,9 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider.value(
           value: productRepository,
+        ),
+        RepositoryProvider.value(
+          value: cartRepository,
         ),
       ],
       child: MultiBlocProvider(
@@ -71,8 +76,8 @@ class _AppBody extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
 
       // declarative navigation
-      routeInformationParser: RouterX.router.routeInformationParser,
-      routerDelegate: RouterX.router.routerDelegate,
+      routeInformationParser: AppRouter.router.routeInformationParser,
+      routerDelegate: AppRouter.router.routerDelegate,
 
       // theme
       theme: AppTheme.light,

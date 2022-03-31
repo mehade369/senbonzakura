@@ -16,7 +16,7 @@ import 'package:senbonzakura/setting/setting.dart';
 import 'package:senbonzakura/sign_in/sign_in.dart';
 import 'package:senbonzakura/sign_up/sign_up.dart';
 
-abstract class App {
+abstract class RouteName {
   static const root = '/';
   static const signIn = 'sign_in';
   static const signUp = 'sign_up';
@@ -28,15 +28,15 @@ abstract class App {
 }
 
 // ignore: avoid_classes_with_only_static_members
-abstract class RouterX {
+abstract class AppRouter {
   static final router = GoRouter(
-    // initialLocation: '${App.root}${App.signIn}',
+    // initialLocation: '${RouteName.root}${RouteName.signIn}',
     debugLogDiagnostics: false,
     urlPathStrategy: UrlPathStrategy.path,
     routes: [
       GoRoute(
-        path: App.root,
-        name: App.root,
+        path: RouteName.root,
+        name: RouteName.root,
         builder: (context, state) => MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -48,7 +48,10 @@ abstract class RouterX {
               )..add(const HomeEvent.started()),
             ),
             BlocProvider(
-              create: (_) => CartBloc()..add(const CartEvent.loadCart()),
+              create: (_) => CartBloc(
+                authRepository: context.read<AuthRepository>(),
+                cartRepository: context.read<CartRepository>(),
+              )..add(const CartEvent.loadCart()),
             ),
             BlocProvider(
               create: (_) => NotificationsBloc(),
@@ -63,13 +66,13 @@ abstract class RouterX {
         ),
         routes: [
           GoRoute(
-            path: App.setting,
-            name: App.setting,
+            path: RouteName.setting,
+            name: RouteName.setting,
             builder: (context, state) => const SettingPage(),
           ),
           GoRoute(
-            name: App.productDetail,
-            path: '${App.productDetail}/:productId',
+            name: RouteName.productDetail,
+            path: '${RouteName.productDetail}/:productId',
             builder: (context, state) {
               final params = state.params['productId'];
 
@@ -109,13 +112,13 @@ abstract class RouterX {
             },
           ),
           GoRoute(
-            path: App.search,
-            name: App.search,
+            path: RouteName.search,
+            name: RouteName.search,
             builder: (_, state) => const SearchPage(),
           ),
           GoRoute(
-            path: App.signIn,
-            name: App.signIn,
+            path: RouteName.signIn,
+            name: RouteName.signIn,
             builder: (_, state) => MultiBlocProvider(
               providers: [
                 BlocProvider(
@@ -128,8 +131,8 @@ abstract class RouterX {
             ),
             // routes: [
             //   GoRoute(
-            //     path: App.forgetPassword,
-            //     name: App.forgetPassword,
+            //     path: RouteName.forgetPassword,
+            //     name: RouteName.forgetPassword,
             //     builder: (context, state) => BlocProvider.value(
             //       value: context.read<SignInCubit>(),
             //       child: ForgetPasswordPage(),
@@ -138,8 +141,8 @@ abstract class RouterX {
             // ],
           ),
           GoRoute(
-            path: App.signUp,
-            name: App.signUp,
+            path: RouteName.signUp,
+            name: RouteName.signUp,
             builder: (context, state) => MultiBlocProvider(
               providers: [
                 BlocProvider(
@@ -152,8 +155,8 @@ abstract class RouterX {
             ),
             // routes: [
             //   GoRoute(
-            //     path: App.signUpForm,
-            //     name: App.signUpForm,
+            //     path: RouteName.signUpForm,
+            //     name: RouteName.signUpForm,
             //     builder: (_, state) => const SignUpForm(),
             //   ),
             // ],

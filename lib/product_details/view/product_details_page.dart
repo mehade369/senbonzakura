@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:milky_way/milky_way.dart';
-import 'package:senbonzakura/app/utils/utils.dart';
+import 'package:senbonzakura/app/app.dart';
 import 'package:senbonzakura/product_details/product_details.dart';
 
 class ProductDetailsPage extends StatelessWidget {
@@ -18,7 +18,7 @@ class ProductDetailsPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () => context.goNamed(App.search),
+            onPressed: () => context.goNamed(RouteName.search),
           ),
           IconButton(
             icon: const Icon(Icons.shopping_cart),

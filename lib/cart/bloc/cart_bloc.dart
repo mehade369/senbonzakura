@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:senbonzakura/modals/modals.dart';
@@ -11,7 +12,10 @@ part 'cart_bloc.freezed.dart';
 // part 'cart_bloc.g.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartBloc() : super(const CartState.loading()) {
+  CartBloc({
+    required AuthRepository authRepository,
+    required CartRepository cartRepository,
+  }) : super(const CartState.loading()) {
     on<CartEvent>(
       (event, emit) async {
         await event.map(

@@ -31,6 +31,7 @@ void bootstrap({
   final authRepository = AuthRepository(authApi: authApi);
   final storageRepository = StorageRepository(storageApi);
   final productRepository = ProductRepository(productApi: productApi);
+  final cartRepository = CartRepository();
 
   runZonedGuarded(
     () async {
@@ -47,6 +48,7 @@ void bootstrap({
               authRepository: authRepository,
               storageRepository: storageRepository,
               productRepository: productRepository,
+              cartRepository: cartRepository,
             ),
           ),
         ),

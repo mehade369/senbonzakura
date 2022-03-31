@@ -37,7 +37,7 @@ class ProductGridView extends StatelessWidget with UiLoggy {
                 product: product,
                 onTap: () {
                   context.goNamed(
-                    App.productDetail,
+                    RouteName.productDetail,
                     params: {
                       'productId': product.id,
                     },

@@ -37,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
       listener: (context, state) {
         if (state.status.isSubmissionSuccess) {
           context.showSnackBarMessage('Sign in success');
-          context.goNamed(App.signIn);
+          context.goNamed(RouteName.signIn);
         }
 
         if (state.status.isSubmissionFailure) {
@@ -89,7 +89,7 @@ class _SignUpPageState extends State<SignUpPage> {
             BottomAction(
               text: 'Already have an account?',
               action: 'Sign in',
-              onPressed: () => context.goNamed(App.signIn),
+              onPressed: () => context.goNamed(RouteName.signIn),
             ),
           ],
         ),

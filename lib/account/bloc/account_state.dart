@@ -9,7 +9,7 @@ class AccountState with _$AccountState {
   }) = _Initial;
 }
 
-enum AvatarStatus { 
+enum AvatarStatus {
   idle,
   uploading,
   uploaded,

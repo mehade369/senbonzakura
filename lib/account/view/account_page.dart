@@ -29,7 +29,7 @@ class AccountPage extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),
-              onPressed: () => context.goNamed(App.setting),
+              onPressed: () => context.goNamed(RouteName.setting),
             ),
           ],
         ),
