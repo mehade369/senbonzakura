@@ -98,23 +98,31 @@ class Avatar extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            OctoImage.fromSet(
-              image: CachedNetworkImageProvider(
-                avatarUlr ?? 'https://picsum.photos/200/300',
+            if (avatarUlr == null)
+              const CircleAvatar(
+                radius: 40,
+                child: Icon(
+                  Icons.person_outline,
+                  size: 50,
+                ),
               ),
-              fit: BoxFit.cover,
-              octoSet: OctoSet.circleAvatar(
-                backgroundColor: Colors.transparent,
-                text: avatarStatus == AvatarStatus.uploading
-                    ? const Loading()
-                    : const Icon(
-                        Icons.person_pin,
-                        color: Colors.white,
-                        size: 70,
-                      ),
+            if (avatarUlr != null)
+              OctoImage.fromSet(
+                image: CachedNetworkImageProvider(
+                  avatarUlr,
+                ),
+                fit: BoxFit.cover,
+                octoSet: OctoSet.circleAvatar(
+                  backgroundColor: context.colorScheme.primary,
+                  text: avatarStatus == AvatarStatus.uploading
+                      ? const Loading()
+                      : Icon(
+                          Icons.person_outline,
+                          size: 50,
+                          color: context.theme.colorScheme.onPrimary,
+                        ),
+                ),
               ),
-            ),
-            // ),
             if (avatarStatus == AvatarStatus.uploading)
               const Positioned(
                 height: 50,

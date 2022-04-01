@@ -1,5 +1,8 @@
+import 'package:app_theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:milky_way/milky_way.dart';
+import 'package:senbonzakura/app/app.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -47,6 +50,7 @@ class SettingPage extends StatelessWidget {
               },
             ),
           ),
+          const _SwitchTheme(),
           _SettingTile(
             setting: const _Setting(
               title: 'Logout',
@@ -58,6 +62,52 @@ class SettingPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _SwitchTheme extends StatelessWidget {
+  const _SwitchTheme({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<ThemeCubit, ThemeState, ThemeMode>(
+      selector: (state) => state.themeMode,
+      builder: (context, themeMode) {
+        return _SettingTile(
+          setting: const _Setting(
+            title: 'Change Theme',
+            icon: Icons.color_lens,
+          ),
+          trailing: Builder(
+            builder: (context) {
+              switch (themeMode) {
+                case ThemeMode.dark:
+                  return const Icon(Icons.brightness_2_outlined);
+                case ThemeMode.light:
+                  return const Icon(Icons.brightness_7_outlined);
+                case ThemeMode.system:
+                  return const Icon(Icons.settings_brightness);
+              }
+            },
+          ),
+          onTap: () {
+            showThemeDialog(
+              context,
+              themeMode: themeMode,
+              onThemeModeChanged: (themeMode) {
+                context
+                    .read<ThemeCubit>()
+                    .toggleThemeMode(themeMode: themeMode);
+
+                context.navigator.pop();
+              },
+            );
+          },
+        );
+      },
     );
   }
 }

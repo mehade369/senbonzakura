@@ -401,7 +401,7 @@ packages:
     source: hosted
     version: "1.0.0"
   flex_color_scheme:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flex_color_scheme
       url: "https://pub.dartlang.org"
@@ -518,13 +518,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.1"
-  fpdart:
-    dependency: "direct main"
-    description:
-      name: fpdart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.14"
   freezed:
     dependency: "direct dev"
     description:
@@ -679,13 +672,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.5"
-  line_icons:
-    dependency: "direct main"
-    description:
-      name: line_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   log_pose:
     dependency: "direct dev"
     description:
