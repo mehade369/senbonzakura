@@ -22,12 +22,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           loadCart: (event) async {
             await Future<void>.delayed(const Duration(seconds: 1));
 
-            emit(
-              repository.getProducts().fold(
-                    CartState.error,
-                    _calculate,
-                  ),
-            );
+            final cart = await cartRepository.getProducts();
+
+            emit(_calculate(cart));
           },
           refresh: (event) {},
           addProductToACart: (event) {
@@ -74,8 +71,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       },
     );
   }
-
-  final CartRepository repository = CartRepository();
 
   // This method is used to calculate the CartState's _Loaded State
   _Loaded _calculate(Cart cart) {

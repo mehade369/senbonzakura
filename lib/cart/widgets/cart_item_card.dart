@@ -72,7 +72,7 @@ class CartItemCard extends StatelessWidget {
                 aspectRatio: 2.1,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: CartStepper(
+                  child: CounterStepper(
                     count: item.quantity,
                     maxCount: item.currentStockCount,
                     onCounterChanged: onQuantityChange,
